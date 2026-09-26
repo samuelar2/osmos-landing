@@ -1,0 +1,570 @@
+{
+  "icon-shield": {
+    "width": 2048,
+    "height": 2048,
+    "avif": [
+      [
+        "/img/icon-shield-240.avif",
+        240
+      ],
+      [
+        "/img/icon-shield-480.avif",
+        480
+      ]
+    ],
+    "webp": [
+      [
+        "/img/icon-shield-240.webp",
+        240
+      ],
+      [
+        "/img/icon-shield-480.webp",
+        480
+      ]
+    ]
+  },
+  "icon-envelope": {
+    "width": 2048,
+    "height": 2048,
+    "avif": [
+      [
+        "/img/icon-envelope-240.avif",
+        240
+      ],
+      [
+        "/img/icon-envelope-480.avif",
+        480
+      ]
+    ],
+    "webp": [
+      [
+        "/img/icon-envelope-240.webp",
+        240
+      ],
+      [
+        "/img/icon-envelope-480.webp",
+        480
+      ]
+    ]
+  },
+  "icon-ticket": {
+    "width": 2048,
+    "height": 2048,
+    "avif": [
+      [
+        "/img/icon-ticket-240.avif",
+        240
+      ],
+      [
+        "/img/icon-ticket-480.avif",
+        480
+      ]
+    ],
+    "webp": [
+      [
+        "/img/icon-ticket-240.webp",
+        240
+      ],
+      [
+        "/img/icon-ticket-480.webp",
+        480
+      ]
+    ]
+  },
+  "icon-calendar": {
+    "width": 2048,
+    "height": 2048,
+    "avif": [
+      [
+        "/img/icon-calendar-240.avif",
+        240
+      ],
+      [
+        "/img/icon-calendar-480.avif",
+        480
+      ]
+    ],
+    "webp": [
+      [
+        "/img/icon-calendar-240.webp",
+        240
+      ],
+      [
+        "/img/icon-calendar-480.webp",
+        480
+      ]
+    ]
+  },
+  "icon-card": {
+    "width": 2048,
+    "height": 2048,
+    "avif": [
+      [
+        "/img/icon-card-240.avif",
+        240
+      ],
+      [
+        "/img/icon-card-480.avif",
+        480
+      ]
+    ],
+    "webp": [
+      [
+        "/img/icon-card-240.webp",
+        240
+      ],
+      [
+        "/img/icon-card-480.webp",
+        480
+      ]
+    ]
+  },
+  "icon-notebook": {
+    "width": 2048,
+    "height": 2048,
+    "avif": [
+      [
+        "/img/icon-notebook-240.avif",
+        240
+      ],
+      [
+        "/img/icon-notebook-480.avif",
+        480
+      ]
+    ],
+    "webp": [
+      [
+        "/img/icon-notebook-240.webp",
+        240
+      ],
+      [
+        "/img/icon-notebook-480.webp",
+        480
+      ]
+    ]
+  },
+  "icon-bolt": {
+    "width": 2048,
+    "height": 2048,
+    "avif": [
+      [
+        "/img/icon-bolt-240.avif",
+        240
+      ],
+      [
+        "/img/icon-bolt-480.avif",
+        480
+      ]
+    ],
+    "webp": [
+      [
+        "/img/icon-bolt-240.webp",
+        240
+      ],
+      [
+        "/img/icon-bolt-480.webp",
+        480
+      ]
+    ]
+  },
+  "mark-glass": {
+    "width": 2048,
+    "height": 2048,
+    "avif": [
+      [
+        "/img/mark-glass-480.avif",
+        480
+      ],
+      [
+        "/img/mark-glass-960.avif",
+        960
+      ]
+    ],
+    "webp": [
+      [
+        "/img/mark-glass-480.webp",
+        480
+      ],
+      [
+        "/img/mark-glass-960.webp",
+        960
+      ]
+    ]
+  },
+  "stage": {
+    "width": 2688,
+    "height": 1520,
+    "avif": [
+      [
+        "/img/stage-1280.avif",
+        1280
+      ],
+      [
+        "/img/stage-2400.avif",
+        2400
+      ]
+    ],
+    "webp": [
+      [
+        "/img/stage-1280.webp",
+        1280
+      ],
+      [
+        "/img/stage-2400.webp",
+        2400
+      ]
+    ]
+  },
+  "horizon-poster": {
+    "width": 1280,
+    "height": 720,
+    "avif": [
+      [
+        "/img/horizon-poster-1280.avif",
+        1280
+      ]
+    ],
+    "webp": [
+      [
+        "/img/horizon-poster-1280.webp",
+        1280
+      ]
+    ]
+  },
+  "screen-results": {
+    "width": 1320,
+    "height": 2868,
+    "avif": [
+      [
+        "/img/screen-results-440.avif",
+        440
+      ],
+      [
+        "/img/screen-results-880.avif",
+        880
+      ]
+    ],
+    "webp": [
+      [
+        "/img/screen-results-440.webp",
+        440
+      ],
+      [
+        "/img/screen-results-880.webp",
+        880
+      ]
+    ]
+  },
+  "screen-holding": {
+    "width": 1320,
+    "height": 2868,
+    "avif": [
+      [
+        "/img/screen-holding-440.avif",
+        440
+      ],
+      [
+        "/img/screen-holding-880.avif",
+        880
+      ]
+    ],
+    "webp": [
+      [
+        "/img/screen-holding-440.webp",
+        440
+      ],
+      [
+        "/img/screen-holding-880.webp",
+        880
+      ]
+    ]
+  },
+  "screen-apps": {
+    "width": 1320,
+    "height": 2868,
+    "avif": [
+      [
+        "/img/screen-apps-440.avif",
+        440
+      ],
+      [
+        "/img/screen-apps-880.avif",
+        880
+      ]
+    ],
+    "webp": [
+      [
+        "/img/screen-apps-440.webp",
+        440
+      ],
+      [
+        "/img/screen-apps-880.webp",
+        880
+      ]
+    ]
+  },
+  "screen-travel": {
+    "width": 1320,
+    "height": 2868,
+    "avif": [
+      [
+        "/img/screen-travel-440.avif",
+        440
+      ],
+      [
+        "/img/screen-travel-880.avif",
+        880
+      ]
+    ],
+    "webp": [
+      [
+        "/img/screen-travel-440.webp",
+        440
+      ],
+      [
+        "/img/screen-travel-880.webp",
+        880
+      ]
+    ]
+  },
+  "hotel-photo": {
+    "width": 1320,
+    "height": 668,
+    "avif": [
+      [
+        "/img/hotel-photo-480.avif",
+        480
+      ],
+      [
+        "/img/hotel-photo-960.avif",
+        960
+      ]
+    ],
+    "webp": [
+      [
+        "/img/hotel-photo-480.webp",
+        480
+      ],
+      [
+        "/img/hotel-photo-960.webp",
+        960
+      ]
+    ]
+  },
+  "tile-calendar": {
+    "width": 288,
+    "height": 288,
+    "avif": [
+      [
+        "/img/tile-calendar-144.avif",
+        144
+      ],
+      [
+        "/img/tile-calendar-288.avif",
+        288
+      ]
+    ],
+    "webp": [
+      [
+        "/img/tile-calendar-144.webp",
+        144
+      ],
+      [
+        "/img/tile-calendar-288.webp",
+        288
+      ]
+    ]
+  },
+  "tile-flights": {
+    "width": 288,
+    "height": 288,
+    "avif": [
+      [
+        "/img/tile-flights-144.avif",
+        144
+      ],
+      [
+        "/img/tile-flights-288.avif",
+        288
+      ]
+    ],
+    "webp": [
+      [
+        "/img/tile-flights-144.webp",
+        144
+      ],
+      [
+        "/img/tile-flights-288.webp",
+        288
+      ]
+    ]
+  },
+  "tile-hotels": {
+    "width": 288,
+    "height": 288,
+    "avif": [
+      [
+        "/img/tile-hotels-144.avif",
+        144
+      ],
+      [
+        "/img/tile-hotels-288.avif",
+        288
+      ]
+    ],
+    "webp": [
+      [
+        "/img/tile-hotels-144.webp",
+        144
+      ],
+      [
+        "/img/tile-hotels-288.webp",
+        288
+      ]
+    ]
+  },
+  "tile-inbox": {
+    "width": 288,
+    "height": 288,
+    "avif": [
+      [
+        "/img/tile-inbox-144.avif",
+        144
+      ],
+      [
+        "/img/tile-inbox-288.avif",
+        288
+      ]
+    ],
+    "webp": [
+      [
+        "/img/tile-inbox-144.webp",
+        144
+      ],
+      [
+        "/img/tile-inbox-288.webp",
+        288
+      ]
+    ]
+  },
+  "tile-notes": {
+    "width": 288,
+    "height": 288,
+    "avif": [
+      [
+        "/img/tile-notes-144.avif",
+        144
+      ],
+      [
+        "/img/tile-notes-288.avif",
+        288
+      ]
+    ],
+    "webp": [
+      [
+        "/img/tile-notes-144.webp",
+        144
+      ],
+      [
+        "/img/tile-notes-288.webp",
+        288
+      ]
+    ]
+  },
+  "tile-rail": {
+    "width": 288,
+    "height": 288,
+    "avif": [
+      [
+        "/img/tile-rail-144.avif",
+        144
+      ],
+      [
+        "/img/tile-rail-288.avif",
+        288
+      ]
+    ],
+    "webp": [
+      [
+        "/img/tile-rail-144.webp",
+        144
+      ],
+      [
+        "/img/tile-rail-288.webp",
+        288
+      ]
+    ]
+  },
+  "tile-reminders": {
+    "width": 288,
+    "height": 288,
+    "avif": [
+      [
+        "/img/tile-reminders-144.avif",
+        144
+      ],
+      [
+        "/img/tile-reminders-288.avif",
+        288
+      ]
+    ],
+    "webp": [
+      [
+        "/img/tile-reminders-144.webp",
+        144
+      ],
+      [
+        "/img/tile-reminders-288.webp",
+        288
+      ]
+    ]
+  },
+  "tile-sandbox": {
+    "width": 288,
+    "height": 288,
+    "avif": [
+      [
+        "/img/tile-sandbox-144.avif",
+        144
+      ],
+      [
+        "/img/tile-sandbox-288.avif",
+        288
+      ]
+    ],
+    "webp": [
+      [
+        "/img/tile-sandbox-144.webp",
+        144
+      ],
+      [
+        "/img/tile-sandbox-288.webp",
+        288
+      ]
+    ]
+  },
+  "tile-wallet": {
+    "width": 288,
+    "height": 288,
+    "avif": [
+      [
+        "/img/tile-wallet-144.avif",
+        144
+      ],
+      [
+        "/img/tile-wallet-288.avif",
+        288
+      ]
+    ],
+    "webp": [
+      [
+        "/img/tile-wallet-144.webp",
+        144
+      ],
+      [
+        "/img/tile-wallet-288.webp",
+        288
+      ]
+    ]
+  }
+}

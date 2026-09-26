@@ -1,0 +1,55 @@
+---
+// The osmos home screen (dark), rebuilt in HTML so the composer can type.
+import AppChrome from "./AppChrome.astro";
+
+interface Props {
+  class?: string;
+  typing?: boolean; // expose the composer for the scroll-driven typing
+}
+const { class: className = "", typing = false } = Astro.props;
+
+const rows = [
+  ["Plan a weekend trip", "Summarise my inbox", "Morning briefing", "Dinner for two Friday"],
+  ["Wrap up the week", "Restaurants nearby", "What needs me today?", "Book a haircut"],
+];
+const icon = {
+  spark: "M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3z",
+  sun: "M12 8a4 4 0 100 8 4 4 0 000-8zM12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4",
+};
+---
+
+<div class={`layer scr-home ${className}`} data-layer="home">
+  <AppChrome tab="chat" action="up" />
+  <div class="home__glow"></div>
+  <div class="home__greet" aria-hidden="true">Hello Sam,<br />What's next?</div>
+  <div class="chips" aria-hidden="true">
+    {
+      rows.map((row) => (
+        <div class="chips__row">
+          {[...row, ...row].map((label, i) => (
+            <span class="chip">
+              <svg viewBox="0 0 24 24" width="1em" height="1em" style="width:calc(17 * var(--u));height:calc(17 * var(--u))" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                <path d={i % 2 ? icon.sun : icon.spark} />
+              </svg>
+              <span>{label}</span>
+            </span>
+          ))}
+        </div>
+      ))
+    }
+  </div>
+  <div class="composer" data-composer={typing ? "" : undefined} aria-hidden="true">
+    <div class="composer__text">
+      <span data-placeholder>Answer osmos…</span><span class="typed" data-typed></span><span class="caret" data-caret hidden></span>
+    </div>
+    <svg class="composer__plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+      ><path d="M12 5v14M5 12h14"></path></svg
+    >
+    <span class="composer__send"
+      ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"
+        ><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"></path></svg
+      ></span
+    >
+  </div>
+  <div class="home__bar"></div>
+</div>

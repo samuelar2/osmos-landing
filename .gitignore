@@ -2,3 +2,9 @@ node_modules/
 dist/
 .astro/
 .DS_Store
+# Image masters (Higgsfield renders, raw simulator captures); optimised copies live in public/
+design/generated/
+design/masters/
+design/screens-raw/
+design/ref/
+e2e-out/

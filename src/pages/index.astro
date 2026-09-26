@@ -1,439 +1,647 @@
 ---
 import "../styles/global.css";
-import AppleBadge from "../components/AppleBadge.astro";
-import PhoneFrame from "../components/PhoneFrame.astro";
+import Img from "../components/Img.astro";
+import Device from "../components/Device.astro";
+import AppChrome from "../components/AppChrome.astro";
+import AppHome from "../components/AppHome.astro";
 
-const miniApps = [
-  {
-    name: "Inbox",
-    desc: "Triage, summaries and drafted replies — plus an agent that answers email for you.",
-    icon: "M4 6h16v12H4z M4 7l8 6 8-6",
-  },
-  {
-    name: "Travel",
-    desc: "Trains, hotels and flights — searched, held, booked. Tickets filed automatically.",
-    icon: "M22 2L11 13 M22 2l-7 20-4-9-9-4z",
-  },
-  {
-    name: "Wallet",
-    desc: "A card Osmos can use with your approval, hard spending caps, every receipt filed.",
-    icon: "M3 7h18v12H3z M3 11h18 M16 15h2",
-  },
-  {
-    name: "Calendar",
-    desc: "Your calendars and school timetables in one place, events created on request.",
-    icon: "M4 5h16v15H4z M4 9h16 M8 3v4 M16 3v4",
-  },
-  {
-    name: "Routines",
-    desc: "Automations that run on your schedule and report back in glanceable cards.",
-    icon: "M20 8a8 8 0 1 0 2 6 M20 3v5h-5",
-  },
-  {
-    name: "Memory",
-    desc: "Say it once. Preferences, people and plans — remembered and actually used.",
-    icon: "M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z M18 16l.9 2.6L21.5 19.5l-2.6.9L18 23l-.9-2.6-2.6-.9 2.6-.9L18 16z",
-  },
-  {
-    name: "Computer",
-    desc: "Its own browser and code sandbox for the tasks a chat window can't finish.",
-    icon: "M4 17l6-6-6-6 M12 19h8",
-  },
-  {
-    name: "Messages",
-    desc: "WhatsApp and Slack, searched and summarised — nothing sends without you.",
-    icon: "M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 21l2-5.6A8.5 8.5 0 1 1 21 11.5z",
-  },
-];
+const APP_STORE = "https://apps.apple.com/us/app/osmos-assistant/id6771561683";
 
-const integrations = [
-  { name: "WhatsApp", slug: "whatsapp" },
-  { name: "Slack", slug: "slack" },
-  { name: "Notion", slug: "notion" },
-  { name: "Linear", slug: "linear" },
-  { name: "GitHub", slug: "github" },
-  { name: "Jira", slug: "jira" },
-  { name: "Google Drive", slug: "googledrive" },
-  { name: "Dropbox", slug: "dropbox" },
-  { name: "Figma", slug: "figma" },
-  { name: "Canva", slug: "canva" },
-  { name: "Trello", slug: "trello" },
-  { name: "Asana", slug: "asana" },
-  { name: "Monday.com", slug: "monday" },
-  { name: "HubSpot", slug: "hubspot" },
-  { name: "Salesforce", slug: "salesforce" },
-  { name: "Stripe", slug: "stripe" },
-  { name: "Zoom", slug: "zoom" },
-  { name: "Google Meet", slug: "googlemeet" },
-  { name: "Discord", slug: "discord" },
-  { name: "Reddit", slug: "reddit" },
-  { name: "LinkedIn", slug: "linkedin" },
-  { name: "Ticketmaster", slug: "ticketmaster" },
-  { name: "Splitwise", slug: "splitwise" },
-  { name: "Airtable", slug: "airtable" },
-  { name: "Confluence", slug: "confluence" },
-  { name: "Zendesk", slug: "zendesk" },
-  { name: "YouTube", slug: "youtube" },
-  { name: "Calendly", slug: "calendly" },
-  { name: "Miro", slug: "miro" },
-  { name: "ClickUp", slug: "clickup" },
-];
+// "|" marks the line break.
+const statement = "The fastest way from | “I need to…” to done.";
 
+const cards = [
+  {
+    icon: "icon-shield",
+    title: "You approve every action.",
+    text: "Sending, booking and paying all wait for your yes. Automation is opt-in, per tool, with limits you set.",
+  },
+  {
+    icon: "icon-notebook",
+    title: "A memory that sticks.",
+    text: "Say it once. Preferences, people and plans are remembered, and used the next time it books, drafts or plans.",
+  },
+  {
+    icon: "icon-bolt",
+    title: "Ahead of your day.",
+    text: "Pulse checks your apps while you're busy and surfaces only what needs you: a briefing, a nudge, a drafted reply.",
+  },
+] as const;
+
+const orbitTiles = ["inbox", "calendar", "flights", "wallet", "rail", "notes", "hotels", "reminders"] as const;
+
+const notes = [
+  { tile: "inbox", title: "Reply drafted", sub: "Jonas · deposit return", pos: "left:5%;top:8%" },
+  { tile: "rail", title: "Eurostar held · 06:01", sub: "St Pancras → Paris Nord", pos: "right:5%;top:4%" },
+  { tile: "calendar", title: "Moved to 10:00", sub: "Design review · today", pos: "left:3%;top:52%", hideSm: true },
+  { tile: "sandbox", title: "Form filled in", sub: "Waiting for your OK to submit", pos: "right:3%;top:58%" },
+  { tile: "reminders", title: "Mum's birthday Friday", sub: "Flowers from the usual florist?", pos: "left:18%;bottom:2%" },
+  { tile: "wallet", title: "Receipt filed", sub: "Hôtel de Paris · £1,529.25", pos: "right:17%;bottom:0%", hideSm: true },
+] as const;
+
+const logos = [
+  ["WhatsApp", "whatsapp"], ["Slack", "slack"], ["Notion", "notion"], ["Linear", "linear"], ["GitHub", "github"],
+  ["Jira", "jira"], ["Google Drive", "googledrive"], ["Dropbox", "dropbox"], ["Figma", "figma"], ["Canva", "canva"],
+  ["Trello", "trello"], ["Asana", "asana"], ["Monday.com", "monday"], ["HubSpot", "hubspot"], ["Salesforce", "salesforce"],
+  ["Stripe", "stripe"], ["Zoom", "zoom"], ["Google Meet", "googlemeet"], ["Discord", "discord"], ["Reddit", "reddit"],
+  ["LinkedIn", "linkedin"], ["Ticketmaster", "ticketmaster"], ["Splitwise", "splitwise"], ["Airtable", "airtable"],
+  ["Confluence", "confluence"], ["Zendesk", "zendesk"], ["YouTube", "youtube"], ["Calendly", "calendly"], ["Miro", "miro"],
+  ["ClickUp", "clickup"],
+] as const;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>osmos — the world's first ai super-app</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>osmos — the world's first AI super-app</title>
     <meta
       name="description"
-      content="One agent that reads your inbox, books your travel, remembers everything and stays ahead of your day — across 60+ of your apps. You approve every action."
+      content="Ask for anything and consider it done. osmos reads your inbox, books your travel, remembers the little things and stays ahead of your day, across 60+ of your apps. You approve every action."
     />
-    <meta name="theme-color" content="#ffffff" />
-    <meta property="og:title" content="osmos — the world's first ai super-app" />
-    <meta
-      property="og:description"
-      content="One agent for your inbox, plans and payments. It acts, you approve."
-    />
+    <meta name="theme-color" content="#050409" />
+    <meta property="og:title" content="osmos — the world's first AI super-app" />
+    <meta property="og:description" content="One agent for your inbox, plans and payments. It acts, you approve." />
     <meta property="og:url" content="https://meetosmos.com" />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://meetosmos.com/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://meetosmos.com/" />
     <link rel="icon" href="/brand/osmos-mark-64.png" type="image/png" />
     <link rel="apple-touch-icon" href="/brand/osmos-mark-180.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@400;700&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="/img/horizon-poster-1280.webp" as="image" fetchpriority="high" />
+    <link rel="preload" href="/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/sulphur-point-700.woff2" as="font" type="font/woff2" crossorigin />
+    <script is:inline>
+      // Play the intro once per session, and never for reduced motion.
+      (function () {
+        try {
+          var skip = navigator.webdriver || /[?&]nointro\b/.test(location.search);
+          if (!skip && !matchMedia("(prefers-reduced-motion: reduce)").matches && !sessionStorage.getItem("osmos-intro")) {
+            document.documentElement.classList.add("has-intro");
+          }
+        } catch (e) {}
+        document.documentElement.classList.add("js");
+        if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+      })();
+    </script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MME55MLNDQ"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
+      function gtag() {
+        dataLayer.push(arguments);
+      }
       gtag("js", new Date());
       gtag("config", "G-MME55MLNDQ");
     </script>
   </head>
 
   <body>
-    <!-- ============ HERO (light — the original meetosmos gradient) ============ -->
-    <header class="hero-aurora relative text-[#0c0618]">
-      <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 pt-7">
-        <a href="/"><img src="/brand/osmos-light.png" alt="osmos" class="h-6 w-auto sm:h-7" /></a>
-        <div class="flex items-center gap-7 text-[14.5px] font-medium">
-          <a href="#superapp" class="hidden opacity-75 hover:opacity-100 sm:block">features</a>
-          <a
-            href="https://apps.apple.com/us/app/osmos-assistant/id6771561683"
-            class="rounded-full bg-[#0c0618] px-5 py-2 font-semibold text-white"
+    <!-- ============ INTRO ============ -->
+    <div id="intro" class="intro" aria-hidden="true">
+      <canvas></canvas>
+      <div class="intro__glyphs">
+        <div class="intro__glyph">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"
+            ><rect x="6" y="14" width="52" height="38" rx="7"></rect><path d="M8 18l24 18 24-18"></path></svg
           >
-            Get the app
-          </a>
         </div>
-      </nav>
-
-      <div class="mx-auto max-w-4xl px-6 pt-24 pb-6 text-center sm:pt-32">
-        <h1 class="display text-[44px] leading-[1.05] font-bold sm:text-[68px]">
-          the world's first<br />ai&nbsp;super-app.
-        </h1>
-        <p class="mx-auto mt-6 max-w-xl text-[17px] leading-relaxed text-[#0c0618]/70 sm:text-[19px]">
-          One agent that tidies your inbox, sorts your travel, remembers the little things and stays
-          a step ahead of your day — across 60+ of your apps. Nothing happens without your OK.
-        </p>
-        <div class="mt-9">
-          <AppleBadge variant="dark" note="Free to start — 100 credits on us" />
+        <div class="intro__glyph">
+          <svg viewBox="0 0 64 64" fill="currentColor"
+            ><path
+              d="M58 30.5c0-2-1.6-3.5-3.6-3.5H40.6L27.8 7.4A2.6 2.6 0 0025.6 6h-3.2c-1 0-1.6 1-1.3 1.9L26.6 27H15.3l-4.7-6.5A2.6 2.6 0 008.5 19.5H6.3c-.9 0-1.5.9-1.2 1.7L8.6 32 5.1 42.8c-.3.8.3 1.7 1.2 1.7h2.2c.8 0 1.6-.4 2.1-1.1l4.7-6.4h11.3l-5.5 19.1c-.3.9.4 1.9 1.3 1.9h3.2c.9 0 1.7-.5 2.2-1.3L40.6 37h13.8c2 0 3.6-1.6 3.6-3.5v-3z"
+            ></path></svg
+          >
         </div>
+        <div class="intro__glyph">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
+            ><rect x="8" y="12" width="48" height="44" rx="8"></rect><path d="M8 26h48M22 6v12M42 6v12"></path><rect
+              x="36"
+              y="36"
+              width="10"
+              height="10"
+              rx="2"
+              fill="currentColor"
+              stroke="none"></rect></svg
+          >
+        </div>
+        <div class="intro__glyph intro__mark"></div>
       </div>
+    </div>
 
-      <!-- the whole product, in one element: the input pill, typing real asks -->
-      <div class="relative z-10 mx-auto max-w-2xl px-6 pt-16 pb-24 sm:pt-24 sm:pb-28">
-        <div class="hero-pill">
-          <span class="hero-pill-text display" id="hero-typed" aria-hidden="true">&nbsp;</span>
-          <span class="sr-only">What's on your mind?</span>
-          <span class="hero-pill-send">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#3b1a78" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 19V5 M5 12l7-7 7 7"></path>
-            </svg>
-          </span>
-        </div>
-      </div>
+    <!-- ============ NAV ============ -->
+    <header class="nav" data-nav>
+      <a href="/" class="nav__logo" aria-label="osmos home">
+        <img src="/brand/osmos-wordmark-white.webp" alt="osmos" width="657" height="153" />
+      </a>
+      <a href={APP_STORE} class="nav__cta">
+        <svg viewBox="0 0 384 512" width="13" height="13" fill="currentColor" aria-hidden="true"
+          ><path
+            d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.7-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
+          ></path></svg
+        >
+        Get the app
+      </a>
     </header>
 
-    <main class="bg-[#0c0618]">
-      <!-- ============ SUPER-APP GRID ============ -->
-      <section id="superapp" class="glow-violet relative pt-14 pb-24 sm:pt-16">
-        <div class="mx-auto max-w-6xl px-6">
-          <div class="reveal mx-auto max-w-2xl text-center">
-            <div class="section-kicker">one agent, every app</div>
-            <h2 class="display mt-3 text-[34px] leading-tight font-bold sm:text-[44px]">
-              a whole phone's worth of apps,<br class="hidden sm:block" /> behind one conversation.
-            </h2>
-            <p class="mt-4 text-[16.5px] leading-relaxed text-white/60">
-              Osmos isn't a chatbot with plugins. It's mini-apps for the things that matter, run by an
-              agent with over 1,000 tools — so "sort it" is a complete instruction.
-            </p>
+    <main>
+      <!-- ============ HERO + STORY ============ -->
+      <section class="hero" id="top" aria-label="osmos: ask for anything, consider it done">
+        <div class="hero__stage" data-stage>
+          <div class="hero__bg">
+            <div class="hero__horizon" data-horizon>
+              <div class="hero__horizon-in" data-horizon-in>
+                <!-- The poster is the loop's first frame, so it paints at once and playback takes over seamlessly. -->
+                <video
+                  data-horizon-video
+                  src="/video/horizon.mp4"
+                  poster="/img/horizon-poster-1280.webp"
+                  muted
+                  loop
+                  playsinline
+                  preload="none"
+                  aria-hidden="true"
+                  tabindex="-1"></video>
+              </div>
+            </div>
+            <div class="hero__glow" data-hero-glow></div>
+            <div class="hero__vignette"></div>
           </div>
 
-          <div class="reveal mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {
-              miniApps.map((app) => (
-                <div class="glass rounded-2xl p-5 transition-colors hover:bg-white/[0.075]">
-                  <svg
-                    viewBox="0 0 24 24"
-                    width="26"
-                    height="26"
-                    fill="none"
-                    stroke="#c084fc"
-                    stroke-width="1.6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    {app.icon.split(" M").map((d, i) => (
-                      <path d={(i === 0 ? "" : "M") + d} />
-                    ))}
-                  </svg>
-                  <div class="display mt-3.5 text-[19px] font-bold">{app.name.toLowerCase()}</div>
-                  <p class="mt-1.5 text-[13.5px] leading-relaxed text-white/55">{app.desc}</p>
+          <div class="floater floater--a" data-floater style="left:6vw;top:52%;width:clamp(96px,11vw,176px)">
+            <div data-float-m><div data-float-in><Img id="icon-envelope" sizes="176px" alt="" loading="eager" /></div></div>
+          </div>
+          <div class="floater floater--b" data-floater style="right:6vw;top:30%;width:clamp(96px,12vw,190px)">
+            <div data-float-m><div data-float-in><Img id="icon-ticket" sizes="190px" alt="" loading="eager" /></div></div>
+          </div>
+          <div class="floater floater--c" data-floater style="left:17vw;top:20%;width:clamp(60px,6vw,96px);filter:blur(1.5px);opacity:.85">
+            <div data-float-m><div data-float-in><Img id="icon-calendar" sizes="96px" alt="" loading="eager" /></div></div>
+          </div>
+
+          <div class="hero__copy" data-hero-copy>
+            <p class="eyebrow" data-hero-in>The world's first AI super-app</p>
+            <h1 class="display h-xl" data-hero-in>Ask for anything.<br /><span class="dim">Consider it done.</span></h1>
+            <div class="hero__ctas" data-hero-in>
+              <a href={APP_STORE} class="appstore">
+                <svg viewBox="0 0 384 512" width="22" height="26" fill="currentColor" aria-hidden="true"
+                  ><path
+                    d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.7-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
+                  ></path></svg
+                >
+                <span><small>Download on the</small> App Store</span>
+              </a>
+              <span class="hero__note">Free to start · 100 credits on us</span>
+            </div>
+          </div>
+
+          <div class="words" aria-hidden="true">
+            <span class="word word--ask" data-word="ask">Ask.</span>
+            <span class="word word--approve" data-word="approve">Approve.</span>
+            <span class="word word--done" data-word="done">Done.</span>
+          </div>
+
+          <div class="device-wrap" data-device-wrap>
+            <div data-device-enter>
+              <Device live data-device>
+                <div class="layer scr-hero" data-layer="hero"></div>
+
+                <AppHome typing class="layer--off" />
+
+                <div class="layer scr-chat layer--off" data-layer="chat">
+                  <AppChrome tab="chat" action="close" />
+                  <div class="bubble" data-bubble>Book me a 5-star hotel in Monte Carlo tonight</div>
+                  <div class="working" data-working><i></i><i></i><i></i><span class="shimmer">Searching hotels in Monte Carlo…</span></div>
+                  <div class="composer composer--dark">
+                    <div class="composer__text"><span>What do you need?</span></div>
+                    <svg class="composer__plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="opacity:.5"
+                      ><path d="M12 5v14M5 12h14"></path></svg
+                    >
+                    <span class="composer__send"
+                      ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"
+                        ><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"></path></svg
+                      ></span
+                    >
+                  </div>
                 </div>
-              ))
-            }
+
+                <div class="layer layer--off" data-layer="results">
+                  <Img id="screen-results" sizes="(min-width: 900px) 360px, 70vw" alt="osmos showing five-star hotels in Monte Carlo, with the Hôtel de Paris at £1,529.25 and a Book button" />
+                </div>
+                <div class="layer layer--off" data-layer="holding">
+                  <Img id="screen-holding" sizes="(min-width: 900px) 360px, 70vw" alt="osmos holding the room while you confirm" />
+                </div>
+                <span class="tap" data-tap="1" style="left:calc(263 * var(--u));top:calc(504 * var(--u))"></span>
+
+                <div class="layer scr-sheet layer--off" data-layer="sheet">
+                  <div class="sheet__dim" data-sheet-dim></div>
+                  <div class="sheet" data-sheet>
+                    <div class="sheet__head">
+                      <span class="sheet__close"
+                        ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                          ><path d="M6 6l12 12M18 6 6 18"></path></svg
+                        ></span
+                      >
+                      <b>Confirm booking</b>
+                    </div>
+                    <div class="card-app">
+                      <div class="sheet__hotel">
+                        <svg viewBox="0 0 24 24" fill="currentColor"
+                          ><path d="M4 7h3v5h14v7h-2v-2H5v2H3V7h1zm5 1h7a3 3 0 013 3H9V8z"></path></svg
+                        >
+                        <div>
+                          <b>Hôtel de Paris Monte-Carlo</b>
+                          <span class="stars">★★★★★</span><br />
+                          <small>Place du Casino</small>
+                        </div>
+                      </div>
+                      <div class="rows">
+                        <div><span>Check-in</span><b>2026-09-19</b></div>
+                        <div><span>Check-out</span><b>2026-09-20</b></div>
+                        <div><span>Room</span><b>Exclusive Room - Casino view</b></div>
+                        <div><span>Board</span><b>Room Only</b></div>
+                      </div>
+                      <div class="badges">
+                        <span class="badge badge--red"><span>Non-refundable</span></span>
+                        <span class="badge badge--violet"><span>Held · <b data-held>9:57</b> left</span></span>
+                      </div>
+                    </div>
+                    <div class="card-app">
+                      <b style="font-size:calc(17 * var(--u));font-weight:600">Payment</b>
+                      <div class="pay-row">
+                        <span class="visa"><span>VISA</span></span>
+                        <span>Visa ···· 4821</span>
+                        <em>Ready</em>
+                      </div>
+                      <div class="totals">
+                        <div><span>Room</span><b>£1,529.25</b></div>
+                        <div><span>Service fee</span><b>£0.00</b></div>
+                        <div class="total"><span>Total</span><b>£1,529.25</b></div>
+                      </div>
+                    </div>
+                    <div class="sheet__foot">
+                      <div class="terms">
+                        <i
+                          ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                            ><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg
+                          ></i
+                        >
+                        <span>I accept Nuitee's terms and the operator's conditions</span>
+                      </div>
+                      <div class="book-btn" data-book><span>Book · £1,529.25</span></div>
+                    </div>
+                  </div>
+                  <span class="tap" data-tap="2" style="left:calc(220 * var(--u));top:calc(880 * var(--u))"></span>
+                </div>
+
+                <div class="layer scr-done layer--off" data-layer="done">
+                  <AppChrome tab="chat" action="close" />
+                  <div class="working" style="top:calc(140 * var(--u))"><span>✓ Booked Hôtel de Paris Monte-Carlo</span></div>
+                  <div class="done__card" data-done-card style="top:calc(182 * var(--u))">
+                    <div class="ph"><Img id="hotel-photo" sizes="360px" alt="" /></div>
+                    <div class="done__body">
+                      <span class="ok"
+                        ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                          ><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg
+                        ><span>Booking confirmed</span></span
+                      >
+                      <b>Hôtel de Paris Monte-Carlo</b>
+                      <p>Tonight · 1 night · Exclusive Room, Casino view</p>
+                    </div>
+                  </div>
+                  <p class="done__msg" style="top:calc(470 * var(--u))">
+                    You're all set for tonight. It's in your calendar, and the confirmation is filed in Wallet.
+                  </p>
+                  <div class="composer composer--dark">
+                    <div class="composer__text"><span>What do you need?</span></div>
+                    <svg class="composer__plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="opacity:.5"
+                      ><path d="M12 5v14M5 12h14"></path></svg
+                    >
+                    <span class="composer__send"
+                      ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"
+                        ><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"></path></svg
+                      ></span
+                    >
+                  </div>
+                </div>
+              </Device>
+            </div>
           </div>
 
-          <div class="reveal mt-12 flex flex-wrap justify-center gap-2">
-            {
-              integrations.map((app) => (
-                <span class="chip">
-                  <img src={`/logos/${app.slug}.png`} alt="" width="18" height="18" loading="lazy" />
-                  {app.name}
-                </span>
-              ))
-            }
-            <span class="chip !text-white/85">+ 30 more</span>
+          <div class="receipt" data-receipt aria-hidden="true">
+            <div class="receipt__top">
+              <div class="receipt__photo"><Img id="hotel-photo" sizes="66px" alt="" /></div>
+              <div class="receipt__title">
+                <b>Booked</b>
+                <span
+                  ><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                    ><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg
+                  >Confirmed</span
+                >
+              </div>
+              <div class="receipt__amount"><b>£1,529.25</b><span>1 night</span></div>
+            </div>
+            <div class="receipt__rows">
+              <div><span>Hotel</span><b>Hôtel de Paris Monte-Carlo</b></div>
+              <div><span>Check-in</span><b>Tonight, 19 Sep</b></div>
+              <div><span>Filed to</span><b>Wallet · Calendar</b></div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- ============ FEATURE STORIES ============ -->
-      <section class="mx-auto max-w-6xl space-y-28 px-6 py-24 sm:space-y-40">
-        <!-- inbox -->
-        <div class="reveal grid items-center gap-12 lg:grid-cols-2">
-          <div>
-            <div class="section-kicker">email</div>
-            <h2 class="display mt-3 text-[32px] leading-tight font-bold sm:text-[40px]">your inbox, handled.</h2>
-            <p class="mt-4 max-w-lg text-[16.5px] leading-relaxed text-white/60">
-              Connect Gmail or Outlook and Osmos triages the noise, flags what actually needs you, and
-              has replies drafted before you've opened the thread. Search your whole inbox in plain
-              English.
-            </p>
-            <div class="glass mt-7 max-w-lg rounded-2xl p-5">
-              <div class="text-[14px] font-semibold text-[#c9b8ff]">Your agent gets its own email address</div>
-              <p class="mt-1.5 text-[14px] leading-relaxed text-white/55">
-                Osmos corresponds from <span class="text-white/85">you@osmos&#8230;</span> on your behalf —
-                chasing replies, arranging meetings, handling sign-ups — and keeps working when people
-                write back.
-              </p>
+      <!-- ============ STATEMENT ============ -->
+      <section class="statement" data-statement>
+        <div class="statement__inner">
+          <h2>
+            {
+              statement.split(" ").map((w, i, all) =>
+                w === "|" ? (
+                  <br />
+                ) : (
+                  <>
+                    <span class={`w ${i === all.length - 1 ? "hl" : ""}`}>{w}</span>{" "}
+                  </>
+                ),
+              )
+            }
+          </h2>
+        </div>
+      </section>
+
+      <!-- ============ TUNNEL ============ -->
+      <section class="tunnel" data-tunnel aria-label="What makes osmos different">
+        <div class="tunnel__inner">
+          <div class="tunnel__walls" aria-hidden="true">
+            <div class="wall wall--l" data-wall="l"></div>
+            <div class="wall wall--r" data-wall="r"></div>
+          </div>
+          <div class="tunnel__fade"></div>
+          <div class="tunnel__cards">
+            {
+              cards.map((c) => (
+                <article class="fcard" data-fcard>
+                  <Img id={c.icon} sizes="220px" alt="" />
+                  <h3>{c.title}</h3>
+                  <p>{c.text}</p>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ STAGE ============ -->
+      <section class="stage" data-stage-section aria-label="One agent, every app">
+        <div class="stage__inner">
+          <div class="stage__card" data-stage-card>
+            <div class="stage__bg" data-stage-bg><Img id="stage" sizes="100vw" alt="" /></div>
+            <h2 class="stage__word stage__word--l" data-stage-word>One agent.</h2>
+            <p class="stage__word stage__word--r" data-stage-word>Every app.</p>
+
+            <div class="stage__side stage__side--l" data-stage-side>
+              <div class="glass pulse-card">
+                <span class="pulse-card__k">Pulse · 7:30</span>
+                <b>Good morning, Sam.</b>
+                <p>Your 9:30 moved to 10:00. Jonas replied about the deposit, and a draft is ready for you.</p>
+              </div>
+            </div>
+            <div class="stage__side stage__side--r" data-stage-side>
+              <div class="glass stage__apps">
+                <b>Works with 60+ apps</b>
+                <p>Mail, calendars, WhatsApp, Slack, Notion and more.</p>
+                <div class="logo-cycle" data-logo-cycle>
+                  <span><img src="/logos/whatsapp.png" alt="WhatsApp" width="36" height="36" loading="lazy" /></span>
+                  <span><img src="/logos/slack.png" alt="Slack" width="36" height="36" loading="lazy" /></span>
+                  <span><img src="/logos/notion.png" alt="Notion" width="36" height="36" loading="lazy" /></span>
+                  <span><img src="/logos/googledrive.png" alt="Google Drive" width="36" height="36" loading="lazy" /></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="stage__phone" data-stage-phone>
+              <Device>
+                <div class="layer"><Img id="screen-apps" sizes="220px" alt="The osmos Apps tab: calendar, tasks and email widgets above Calendar, Inbox, Wallet, Reminders, Notes, Files and Store" /></div>
+              </Device>
             </div>
           </div>
-          <div class="flex justify-center">
-            <PhoneFrame
-              shot="/screens/inbox.png"
-              alt="The osmos inbox: triaged threads with needs-reply flags"
-            />
-          </div>
+        </div>
+      </section>
+
+      <!-- ============ LIGHT: ORBIT + STAT ============ -->
+      <section class="light" aria-label="Every app, one place to ask">
+        <div class="orbit__head wrap">
+          <h2 class="display h-lg" data-reveal>Every app.<br /><span class="v">One place to ask.</span></h2>
+          <p class="lede" data-reveal style="--d:.1s">
+            Your mail, calendars, messages, files, travel and payments, searched, summarised and acted on from a single
+            conversation. Nothing happens without your OK.
+          </p>
         </div>
 
-        <!-- travel & payments -->
-        <div class="reveal grid items-center gap-12 lg:grid-cols-2">
-          <div class="flex justify-center lg:order-1">
-            <PhoneFrame shot="/screens/hotel.png" alt="osmos finding hotels near a Madrid restaurant, bookable in one tap" />
-          </div>
-          <div class="lg:order-2">
-            <div class="section-kicker">travel &amp; payments</div>
-            <h2 class="display mt-3 text-[32px] leading-tight font-bold sm:text-[40px]">
-              plans that book themselves.
+        <div class="orbit" data-orbit>
+          <div class="orbit__ring" data-orbit-ring aria-hidden="true"></div>
+          <div class="orbit__core" style="z-index:2"><Img id="mark-glass" sizes="300px" alt="" /></div>
+          {
+            orbitTiles.map((t) => (
+              <span class="orbit__tile" data-orbit-tile aria-hidden="true">
+                <Img id={`tile-${t}`} sizes="76px" alt="" />
+              </span>
+            ))
+          }
+          {
+            notes.map((n, i) => (
+              <div class={`note ${"hideSm" in n && n.hideSm ? "note--hide-sm" : ""}`} data-note data-n={i} style={n.pos}>
+                <Img id={`tile-${n.tile}`} sizes="38px" alt="" />
+                <div>
+                  <b>{n.title}</b>
+                  <span>{n.sub}</span>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="stat" data-reveal>
+          <div class="stat__n"><span data-count="60">60</span>+</div>
+          <p>
+            apps connected, from <em>Gmail and Outlook</em> to WhatsApp, Slack and Notion, with <em>over 1,000 tools</em> behind
+            one conversation.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ BENTO ============ -->
+      <section class="bento" aria-label="Everything osmos does">
+        <div class="wrap">
+          <div class="bento__head">
+            <h2 class="display h-lg" data-reveal>
+              A whole phone's worth of apps.<br /><span class="grad">Behind one conversation.</span>
             </h2>
-            <p class="mt-4 max-w-lg text-[16.5px] leading-relaxed text-white/60">
-              Trains, hotels, flights — Osmos finds the option you'd have picked, holds it, and pays
-              with your saved card the moment you approve. Tickets land in your wallet as PDFs; your
-              travel profile fills in the boring bits.
-            </p>
-            <ul class="mt-6 max-w-lg space-y-2.5 text-[15px] text-white/70">
-              <li class="flex gap-3"><span class="text-[#c084fc]">—</span> Every purchase needs your approval, unless you say otherwise</li>
-              <li class="flex gap-3"><span class="text-[#c084fc]">—</span> Hard spending caps: per booking, per day, refundable-only</li>
-              <li class="flex gap-3"><span class="text-[#c084fc]">—</span> Bookings from your email are filed to your wallet automatically</li>
-            </ul>
           </div>
-        </div>
 
-        <!-- memory -->
-        <div class="reveal grid items-center gap-12 lg:grid-cols-2">
-          <div>
-            <div class="section-kicker">memory</div>
-            <h2 class="display mt-3 text-[32px] leading-tight font-bold sm:text-[40px]">a memory that sticks.</h2>
-            <p class="mt-4 max-w-lg text-[16.5px] leading-relaxed text-white/60">
-              Say it once. Preferences, people, plans, the railcard you always forget — Osmos remembers,
-              and quietly uses it the next time it books, drafts or plans for you.
-            </p>
-            <p class="mt-4 max-w-lg text-[16.5px] leading-relaxed text-white/60">
-              Your memories are yours: browse them, edit them, delete them — or delete everything.
-            </p>
-          </div>
-          <div class="flex justify-center">
-            <PhoneFrame
-              shot="/screens/memory.png"
-              alt="osmos remembering preferences mid-conversation: aisle seat always, vegetarian for food picks"
-            />
-          </div>
-        </div>
+          <div class="bento__grid">
+            <article class="tile tile--wide" data-reveal>
+              <h3>Your inbox, handled.</h3>
+              <p>Connect Gmail or Outlook. osmos triages the noise, flags what needs you and drafts replies before you open the thread.</p>
+              <div class="inbox" aria-hidden="true">
+                <div class="inbox__row">
+                  <span class="inbox__av" style="background:#c2410c">AR</span>
+                  <div><b>Amelia Ross</b><span>Contract: final signature needed</span></div>
+                  <em class="tag-draft">Draft ready</em>
+                </div>
+                <div class="inbox__row">
+                  <span class="inbox__av" style="background:#1d4ed8">BA</span>
+                  <div><b>British Airways</b><span>Your flight BA432 is confirmed</span></div>
+                  <em class="tag-filed">Filed to Wallet</em>
+                </div>
+                <div class="inbox__row">
+                  <span class="inbox__av" style="background:#0f766e">JK</span>
+                  <div><b>Jonas Keller</b><span>Re: deposit return</span></div>
+                  <em class="tag-reply">Needs reply</em>
+                </div>
+                <div class="inbox__row">
+                  <span class="inbox__av" style="background:#52525b">12</span>
+                  <div><b>Newsletters</b><span>12 issues, summarised in one line each</span></div>
+                  <em class="tag-low">Low priority</em>
+                </div>
+              </div>
+            </article>
 
-        <!-- proactive -->
-        <div class="reveal grid items-center gap-12 lg:grid-cols-2">
-          <div class="flex justify-center lg:order-1">
-            <PhoneFrame
-              shot="/screens/pulse.png"
-              alt="The osmos home screen surfacing a timely reminder"
-            />
-          </div>
-          <div class="lg:order-2">
-            <div class="section-kicker">pulse</div>
-            <h2 class="display mt-3 text-[32px] leading-tight font-bold sm:text-[40px]">ahead of your day.</h2>
-            <p class="mt-4 max-w-lg text-[16.5px] leading-relaxed text-white/60">
-              While you're not looking, Osmos checks your connected apps and curates what deserves your
-              attention: a briefing before the day starts, a nudge before something slips, a drafted
-              reply before the deadline.
-            </p>
-            <ul class="mt-6 max-w-lg space-y-2.5 text-[15px] text-white/70">
-              <li class="flex gap-3"><span class="text-[#c084fc]">—</span> Routines that run on your schedule and report back in cards</li>
-              <li class="flex gap-3"><span class="text-[#c084fc]">—</span> Home-screen widgets and Apple Shortcuts for your daily brief</li>
-              <li class="flex gap-3"><span class="text-[#c084fc]">—</span> Never spam: it pings you only when something needs you</li>
-            </ul>
+            <article class="tile tile--tall tile--center" data-reveal style="--d:.08s;min-height:560px">
+              <div class="tile__glow"></div>
+              <h3>Plans that book themselves.</h3>
+              <p>Trains, flights and hotels, searched and held. osmos pays with your saved card the moment you approve.</p>
+              <div class="mini-phone">
+                <Device>
+                  <div class="layer"><Img id="screen-travel" sizes="250px" alt="osmos showing Eurostar options from London St Pancras to Paris Nord" /></div>
+                </Device>
+              </div>
+            </article>
+
+            <article class="tile" data-reveal>
+              <Img id="icon-envelope" class="tile__icon" sizes="120px" alt="" />
+              <h3>Its own email address.</h3>
+              <p>osmos writes from its own address on your behalf, chasing replies and arranging meetings, and keeps going when people write back.</p>
+              <span class="addr"><i></i>sam@osmos…</span>
+            </article>
+
+            <article class="tile tile--pulse" data-reveal style="--d:.08s">
+              <h3>Ahead of your day.</h3>
+              <p>A briefing before the day starts, a nudge before something slips.</p>
+              <div class="pnote">
+                <small>Action</small>
+                <b>Deposit form due today</b>
+                <span>Jonas replied overnight. Your answer is drafted.</span>
+              </div>
+              <div class="pnote">
+                <small>Reminder</small>
+                <b>Mum's birthday Friday</b>
+              </div>
+            </article>
+
+            <article class="tile tile--wide" data-reveal>
+              <h3>Works with 60+ apps.</h3>
+              <p>Plus your email and calendars. Connect what you use, and ask about any of it.</p>
+              <div class="logos" data-logos>
+                {
+                  logos.map(([name, slug]) => (
+                    <span title={name} data-wobble>
+                      <img src={`/logos/${slug}.png`} alt={name} width="32" height="32" loading="lazy" />
+                    </span>
+                  ))
+                }
+              </div>
+            </article>
+
+            <article class="tile" data-reveal style="--d:.08s">
+              <Img id="icon-card" class="tile__icon" sizes="120px" alt="" />
+              <h3>Spending with guardrails.</h3>
+              <div class="toggles" aria-hidden="true">
+                <div class="toggle"><span>Ask before every purchase</span><i></i></div>
+                <div class="toggle"><span>Cap per booking</span><b>£250</b></div>
+                <div class="toggle"><span>Refundable only</span><i></i></div>
+              </div>
+            </article>
           </div>
         </div>
       </section>
 
       <!-- ============ TRUST ============ -->
-      <section class="glow-fuchsia relative py-24">
-        <div class="mx-auto max-w-6xl px-6">
-          <div class="reveal mx-auto max-w-2xl text-center">
-            <div class="section-kicker">trust</div>
-            <h2 class="display mt-3 text-[34px] leading-tight font-bold sm:text-[44px]">
-              it works for you.<br />and only you.
-            </h2>
-            <p class="mt-4 text-[16.5px] leading-relaxed text-white/60">
-              An agent that reads your email and spends your money has to earn it. This is the deal:
-            </p>
-          </div>
-
-          <div class="reveal mt-12 grid gap-4 sm:grid-cols-2">
-            <div class="glass rounded-2xl p-6">
-              <div class="display text-[20px] font-bold">you approve every action</div>
-              <p class="mt-2 text-[14.5px] leading-relaxed text-white/55">
-                Sending, posting, booking, paying — anything that acts on the world waits for your
-                explicit yes. Automation is opt-in, per tool, with limits you set.
-              </p>
+      <section class="trust" aria-label="Privacy and control">
+        <div class="wrap">
+          <h2 class="display h-lg" data-reveal style="text-align:center">
+            It works for you.<br /><span class="dim">And only you.</span>
+          </h2>
+          <div class="trust__grid">
+            <div class="trust__item" data-reveal>
+              <Img id="icon-shield" sizes="76px" alt="" />
+              <h3>You approve every action</h3>
+              <p>Sending, posting, booking and paying wait for your explicit yes. Automation is opt-in, per tool, with limits you set.</p>
             </div>
-            <div class="glass rounded-2xl p-6">
-              <div class="display text-[20px] font-bold">your mailbox stays yours</div>
-              <p class="mt-2 text-[14.5px] leading-relaxed text-white/55">
-                Osmos reads transiently and doesn't keep a copy of your mailbox. What it does store is
-                encrypted at rest with per-account keys.
-              </p>
+            <div class="trust__item" data-reveal style="--d:.06s">
+              <Img id="icon-envelope" sizes="76px" alt="" />
+              <h3>Your mailbox stays yours</h3>
+              <p>osmos reads transiently and doesn't keep a copy of your mailbox. What it stores is encrypted at rest with per-account keys.</p>
             </div>
-            <div class="glass rounded-2xl p-6">
-              <div class="display text-[20px] font-bold">never sold. never for ads.</div>
-              <p class="mt-2 text-[14.5px] leading-relaxed text-white/55">
-                Your data is never sold, never used for advertising, and never used to train AI models.
-              </p>
+            <div class="trust__item" data-reveal style="--d:.12s">
+              <Img id="icon-notebook" sizes="76px" alt="" />
+              <h3>Never sold. Never for ads.</h3>
+              <p>Your data is never sold, never used for advertising, and never used to train AI models.</p>
             </div>
-            <div class="glass rounded-2xl p-6">
-              <div class="display text-[20px] font-bold">leave with everything</div>
-              <p class="mt-2 text-[14.5px] leading-relaxed text-white/55">
-                Export your data whenever you like. Delete your account and it's gone — chats, memories,
-                tickets, connections, all of it.
-              </p>
+            <div class="trust__item" data-reveal style="--d:.18s">
+              <Img id="icon-bolt" sizes="76px" alt="" />
+              <h3>Leave with everything</h3>
+              <p>Export whenever you like. Delete your account and it's gone: chats, memories, tickets and connections.</p>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- ============ CTA ============ -->
+      <section class="cta" data-cta>
+        <h2 class="display h-xl" data-reveal>Your agent is waiting.</h2>
+        <p class="lede" data-reveal style="--d:.08s">Free to start. You approve every action. It gets better the longer you talk to it.</p>
+        <div class="cta__btn" data-reveal style="--d:.16s">
+          <a href={APP_STORE} class="appstore appstore--dark">
+            <svg viewBox="0 0 384 512" width="22" height="26" fill="currentColor" aria-hidden="true"
+              ><path
+                d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.7-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
+              ></path></svg
+            >
+            <span><small>Download on the</small> App Store</span>
+          </a>
+        </div>
+        <div class="cta__scene" aria-hidden="true">
+          <div class="cta__phone" data-cta-phone>
+            <Device><AppHome /></Device>
+          </div>
+          <div class="cta__obj" data-cta-obj="0.8" style="left:calc(50% - min(330px,70vw)/2 - 13vw);top:6%"><Img id="icon-envelope" sizes="170px" alt="" /></div>
+          <div class="cta__obj" data-cta-obj="1.2" style="left:calc(50% + min(330px,70vw)/2 + 3vw);top:2%"><Img id="icon-ticket" sizes="170px" alt="" /></div>
+          <div class="cta__obj" data-cta-obj="0.5" style="left:calc(50% - min(330px,70vw)/2 - 22vw);top:44%;width:clamp(64px,7vw,110px)"><Img id="icon-calendar" sizes="110px" alt="" /></div>
+          <div class="cta__obj" data-cta-obj="1" style="left:calc(50% + min(330px,70vw)/2 + 15vw);top:40%;width:clamp(64px,8vw,120px)"><Img id="icon-shield" sizes="120px" alt="" /></div>
+        </div>
+      </section>
     </main>
 
-    <!-- ============ FINAL CTA + FOOTER (one glow spans both, so it never cuts off) ============ -->
-    <div class="cta-aurora">
-      <section class="py-28 text-center">
-          <div class="reveal mx-auto max-w-2xl px-6">
-            <h2 class="display text-[38px] leading-tight font-bold sm:text-[52px]">
-              your agent is waiting.
-            </h2>
-            <p class="mt-4 text-[17px] text-white/65">
-              Free to start. You approve every action. It gets better the longer you talk to it.
-            </p>
-            <div class="mt-9">
-              <AppleBadge variant="light" />
-            </div>
-          </div>
-      </section>
-
-      <footer>
-      <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-5 px-6 py-10 sm:flex-row">
-        <img src="/brand/osmos-dark.png" alt="osmos" class="h-5 w-auto opacity-90" />
-        <nav class="flex flex-wrap items-center justify-center gap-6 text-[13.5px] font-medium text-white/60">
-          <a href="/privacy.html" class="hover:text-white">Privacy Policy</a>
-          <a href="/terms.html" class="hover:text-white">Terms of Use</a>
-          <a href="mailto:hello@meetosmos.com" class="hover:text-white">Contact</a>
-        </nav>
-        <div class="text-[12.5px] text-white/35">© 2026 Brightboard AI LTD</div>
+    <footer class="footer">
+      <div class="footer__top">
+        <h2>Questions? Say hello.</h2>
+        <a class="footer__mail" href="mailto:hello@meetosmos.com">hello@meetosmos.com</a>
       </div>
-      </footer>
-    </div>
+      <div class="footer__bottom">
+        <img src="/brand/osmos-wordmark-white.webp" alt="osmos" width="657" height="153" loading="lazy" />
+        <nav aria-label="Legal">
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Use</a>
+          <a href="mailto:hello@meetosmos.com">Contact</a>
+        </nav>
+        <span>© 2026 Brightboard AI LTD</span>
+      </div>
+    </footer>
 
-    <script is:inline>
-      // Hero pill: type real asks, one after another.
-      (() => {
-        const el = document.getElementById("hero-typed");
-        if (!el) return;
-        const prompts = [
-          "get me to Paris on Friday morning",
-          "reply to Jonas about the deposit",
-          "what needs me today?",
-          "book dinner near the office Thursday",
-          "find a hotel near the Marais",
-          "remind me before mum's birthday",
-        ];
-        if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
-          el.textContent = prompts[0];
-          return;
-        }
-        let p = 0, i = 0, deleting = false;
-        const tick = () => {
-          const text = prompts[p];
-          if (!deleting) {
-            i++;
-            el.textContent = text.slice(0, i);
-            if (i === text.length) { deleting = true; return setTimeout(tick, 2100); }
-            return setTimeout(tick, 38 + Math.random() * 45);
-          }
-          i -= 3;
-          if (i <= 0) { i = 0; deleting = false; p = (p + 1) % prompts.length; el.innerHTML = "&nbsp;"; return setTimeout(tick, 420); }
-          el.textContent = text.slice(0, i);
-          return setTimeout(tick, 16);
-        };
-        setTimeout(tick, 900);
-      })();
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          for (const e of entries) {
-            if (e.isIntersecting) {
-              e.target.classList.add("is-visible");
-              observer.unobserve(e.target);
-            }
-          }
-        },
-        { threshold: 0.12 }
-      );
-      document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    <script>
+      import "../scripts/site";
     </script>
   </body>
 </html>

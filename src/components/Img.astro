@@ -1,0 +1,38 @@
+---
+// <picture> for an image in src/generated/images.json (built by `npm run images`).
+import images from "../generated/images.json";
+
+interface Props {
+  id: keyof typeof images;
+  alt?: string;
+  sizes?: string;
+  class?: string;
+  loading?: "lazy" | "eager";
+  fetchpriority?: "high" | "low" | "auto";
+  [key: string]: unknown;
+}
+
+const { id, alt = "", sizes = "100vw", class: className, loading = "lazy", fetchpriority, ...rest } = Astro.props;
+const img = images[id];
+if (!img) throw new Error(`Unknown image id: ${String(id)}`);
+const srcset = (list: (string | number)[][]) => list.map(([url, w]) => `${url} ${w}w`).join(", ");
+const [largest, largestW] = img.webp[img.webp.length - 1] as [string, number];
+const height = Math.round((Number(largestW) * img.height) / img.width);
+---
+
+<picture>
+  <source type="image/avif" srcset={srcset(img.avif)} sizes={sizes} />
+  <img
+    src={largest}
+    srcset={srcset(img.webp)}
+    sizes={sizes}
+    width={largestW}
+    height={height}
+    alt={alt}
+    loading={loading}
+    decoding="async"
+    fetchpriority={fetchpriority}
+    class={className}
+    {...rest}
+  />
+</picture>

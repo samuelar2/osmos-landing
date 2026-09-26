@@ -1,0 +1,53 @@
+---
+// CSS iPhone. Everything inside .screen is sized in var(--u) = 1pt of a
+// 440pt-wide screen, so the same markup works at any --w.
+interface Props {
+  class?: string;
+  live?: boolean; // start with the Dynamic Island's live activity open
+  [key: string]: unknown;
+}
+const { class: className = "", live = false, ...rest } = Astro.props;
+---
+
+<div class={`device ${className}`} {...rest}>
+  <span class="device__btn device__btn--action"></span>
+  <span class="device__btn device__btn--vup"></span>
+  <span class="device__btn device__btn--vdown"></span>
+  <span class="device__btn device__btn--power"></span>
+  <div class="device__glass">
+    <div class="screen">
+      <div class={`island ${live ? "is-live" : ""}`} data-island>
+        {
+          live && (
+            <div class="island__live" aria-hidden="true">
+              <span class="island__mark" />
+              <span class="island__text">
+                <span data-island-text>Booking your table…</span>
+              </span>
+              <span class="island__ring">
+                <svg viewBox="0 0 40 40">
+                  <circle cx="20" cy="20" r="16" fill="none" stroke="rgb(139 124 247 / 0.25)" stroke-width="4" />
+                  <circle
+                    data-island-ring
+                    cx="20"
+                    cy="20"
+                    r="16"
+                    fill="none"
+                    stroke="#8b7cf7"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                    stroke-dasharray="100.5"
+                    stroke-dashoffset="12"
+                  />
+                </svg>
+                <b data-island-pct>88%</b>
+              </span>
+            </div>
+          )
+        }
+      </div>
+      <slot />
+    </div>
+  </div>
+  <span class="device__glow" aria-hidden="true"></span>
+</div>
