@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "images": "node scripts/optimise-images.mjs",
-    "test:e2e": "node scripts/e2e-scroll.mjs http://localhost:4400/?nointro e2e-out desktop && node scripts/e2e-scroll.mjs http://localhost:4400/?nointro e2e-out mobile"
+    "test:e2e": "node scripts/e2e-scroll.mjs http://localhost:4400/?nointro e2e-out desktop && node scripts/e2e-scroll.mjs http://localhost:4400/?nointro e2e-out mobile",
+    "test:layers": "node scripts/layer-memory.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.0",

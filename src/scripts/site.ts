@@ -434,22 +434,94 @@ function statement() {
 /* ------------------------------------------------------------------
    Tunnel: grid walls stream past, cards fly in and out of depth
 ------------------------------------------------------------------- */
+// Two grid walls running away from the viewer, projected with the same maths CSS
+// perspective(900px) would use, drawn on one viewport-sized canvas. Cheap on memory
+// (the CSS-3D version needed ~400 MB of layers on a 3x phone and crashed iOS Safari).
+function tunnelGrid(canvas: HTMLCanvasElement) {
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return { draw: (_offset: number) => {} };
+  const F = 900; // perspective distance, px
+  const CELL = 120; // grid pitch, px
+  const FAR = 3040; // depth where the lines have faded out
+  const STOPS = [0, 480, 960, 1440, 1920, 2400, 2880, FAR];
+  const fade = (d: number) => (d < 1440 ? 1 - (0.4 * d) / 1440 : 0.6 * Math.max(0, 1 - (d - 1440) / (FAR - 1440)));
+  const scale = (d: number) => F / (F + d);
+  let w = 0,
+    h = 0,
+    offset = 0,
+    queued = false;
+
+  const render = () => {
+    queued = false;
+    ctx.clearRect(0, 0, w, h);
+    const cx = w / 2,
+      cy = h / 2,
+      top = -0.6 * h,
+      bottom = 1.6 * h,
+      sFar = scale(FAR);
+    ctx.lineWidth = 1;
+    for (const side of [-1, 1]) {
+      const x = (s: number) => cx + side * cx * s; // walls stand on the viewport's left/right edges
+      // lines running into the distance, fading with depth
+      for (let y = top; y <= bottom + 0.5; y += CELL) {
+        const x0 = x(1),
+          y0 = y,
+          x1 = x(sFar),
+          y1 = cy + (y - cy) * sFar;
+        const g = ctx.createLinearGradient(x0, y0, x1, y1);
+        for (const d of STOPS) g.addColorStop((1 - scale(d)) / (1 - sFar), `rgba(255,255,255,${(0.16 * fade(d)).toFixed(3)})`);
+        ctx.strokeStyle = g;
+        ctx.beginPath();
+        ctx.moveTo(x0, y0);
+        ctx.lineTo(x1, y1);
+        ctx.stroke();
+      }
+      // rungs across the walls, streaming towards the viewer as you scroll
+      for (let d = (CELL - (offset % CELL)) % CELL; d < FAR; d += CELL) {
+        const s = scale(d);
+        ctx.strokeStyle = `rgba(255,255,255,${(0.16 * fade(d)).toFixed(3)})`;
+        ctx.beginPath();
+        ctx.moveTo(x(s), cy + (top - cy) * s);
+        ctx.lineTo(x(s), cy + (bottom - cy) * s);
+        ctx.stroke();
+      }
+    }
+  };
+  const size = () => {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    w = canvas.clientWidth;
+    h = canvas.clientHeight;
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    render();
+  };
+  size();
+  new ResizeObserver(size).observe(canvas);
+  return {
+    draw: (o: number) => {
+      offset = o;
+      if (!queued) {
+        queued = true;
+        requestAnimationFrame(render);
+      }
+    },
+  };
+}
+
 function tunnel() {
-  const walls = $$("[data-wall]");
   const cards = $$("[data-fcard]");
   const CELL = 120;
-  gsap.set(walls[0], { rotationY: 90, transformOrigin: "0% 50%" });
-  gsap.set(walls[1], { rotationY: -90, transformOrigin: "100% 50%" });
+  const grid = tunnelGrid($<HTMLCanvasElement>("[data-tunnel-grid]"));
   ScrollTrigger.create({
     trigger: "[data-tunnel]",
     start: "top bottom",
     end: "bottom top",
-    onUpdate: (self) => {
-      const off = (self.progress * CELL * 26) % CELL;
-      gsap.set(walls[0], { x: -off });
-      gsap.set(walls[1], { x: off });
-    },
+    onUpdate: (self) => grid.draw(self.progress * CELL * 26),
   });
+  // Each card carries its own perspective (they start centred, so it matches a shared
+  // vanishing point) instead of sharing a preserve-3d context.
+  gsap.set(cards, { transformPerspective: 900 });
 
   const mm = gsap.matchMedia();
   mm.add({ wide: "(min-width: 900px)", narrow: "(max-width: 899px)" }, (ctx) => {
@@ -697,6 +769,7 @@ function staticHero() {
 
 if (reduceMotion) {
   staticHero();
+  tunnelGrid($<HTMLCanvasElement>("[data-tunnel-grid]")).draw(0);
   orbit();
   reveals();
 } else {

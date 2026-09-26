@@ -1427,38 +1427,16 @@ html.has-intro body {
   height: 100vh;
   height: 100svh;
   overflow: hidden;
-  perspective: 900px;
-  perspective-origin: 50% 50%;
 }
-.tunnel__walls {
+/* The perspective grid is drawn on one viewport-sized canvas (see tunnelGrid in site.ts).
+   It used to be two 3200px CSS-3D walls with masks, which is enough layer memory to make
+   iOS Safari kill the tab. */
+.tunnel__grid {
   position: absolute;
   inset: 0;
-  transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-}
-.wall {
-  position: absolute;
-  top: -60vh;
-  height: 220vh;
-  width: 3200px;
-  background-image:
-    linear-gradient(90deg, rgb(255 255 255 / 0.16) 1px, transparent 1px),
-    linear-gradient(0deg, rgb(255 255 255 / 0.16) 1px, transparent 1px);
-  background-size: 120px 120px;
-  -webkit-mask-image: linear-gradient(90deg, #000 0%, rgb(0 0 0 / 0.6) 45%, transparent 95%);
-  mask-image: linear-gradient(90deg, #000 0%, rgb(0 0 0 / 0.6) 45%, transparent 95%);
-}
-.wall--l {
-  left: 0;
-  transform-origin: 0 50%;
-  transform: rotateY(90deg);
-}
-.wall--r {
-  right: 0;
-  transform-origin: 100% 50%;
-  transform: rotateY(-90deg);
-  -webkit-mask-image: linear-gradient(270deg, #000 0%, rgb(0 0 0 / 0.6) 45%, transparent 95%);
-  mask-image: linear-gradient(270deg, #000 0%, rgb(0 0 0 / 0.6) 45%, transparent 95%);
 }
 .tunnel__fade {
   position: absolute;
@@ -1473,7 +1451,6 @@ html.has-intro body {
   inset: 0;
   display: grid;
   place-items: center;
-  transform-style: preserve-3d;
 }
 .fcard {
   position: absolute;
@@ -2357,6 +2334,13 @@ html.has-intro body {
   }
   .floater--c {
     display: none;
+  }
+  .device__glow {
+    box-shadow:
+      0 0 0 2px rgb(196 184 255 / 0.9),
+      0 0 14px 2px rgb(150 126 255 / 0.85),
+      0 0 60px 10px rgb(124 92 255 / 0.5),
+      0 0 120px 24px rgb(124 92 255 / 0.22);
   }
   .floater--a {
     left: -4vw !important;
