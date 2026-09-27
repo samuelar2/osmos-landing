@@ -1,0 +1,118 @@
+---
+// Visuals for feature pages: a real app screen in the phone, a glass icon, or a small HTML mock.
+import Img from "./Img.astro";
+import Device from "./Device.astro";
+import type { Visual } from "../data/features";
+
+interface Props {
+  v: Visual;
+  eager?: boolean;
+}
+const { v, eager = false } = Astro.props;
+---
+
+<div class="split__visual">
+  {
+    v.kind === "screen" && (
+      <Device>
+        <div class="layer">
+          <Img id={v.id} sizes="280px" alt={v.alt} loading={eager ? "eager" : "lazy"} />
+        </div>
+      </Device>
+    )
+  }
+  {v.kind === "icon" && <Img id={v.id as any} class="glass-icon" sizes="220px" alt="" loading={eager ? "eager" : "lazy"} />}
+  {
+    v.kind === "mock" && v.name === "inbox" && (
+      <div class="mock" aria-hidden="true">
+        <div class="mock__row">
+          <span class="mock__av" style="background:#c2410c">AR</span>
+          <div><b>Amelia Ross</b><span>Contract: final signature needed</span></div>
+          <em class="tag tag--draft">Draft ready</em>
+        </div>
+        <div class="mock__row">
+          <span class="mock__av" style="background:#1d4ed8">BA</span>
+          <div><b>British Airways</b><span>Your flight BA432 is confirmed</span></div>
+          <em class="tag tag--filed">Filed to Wallet</em>
+        </div>
+        <div class="mock__row">
+          <span class="mock__av" style="background:#0f766e">JK</span>
+          <div><b>Jonas Keller</b><span>Re: deposit return</span></div>
+          <em class="tag tag--reply">Needs reply</em>
+        </div>
+        <div class="mock__row">
+          <span class="mock__av" style="background:#52525b">12</span>
+          <div><b>Newsletters</b><span>12 issues, one line each</span></div>
+          <em class="tag">Later</em>
+        </div>
+      </div>
+    )
+  }
+  {
+    v.kind === "mock" && v.name === "memory" && (
+      <div class="mock" aria-hidden="true">
+        <div class="mock__bubble">Btw I'm vegetarian now, and I always want an aisle seat</div>
+        <div class="mock__pill"><i></i>2 things remembered</div>
+        <div class="mock__chips">
+          <span>vegetarian</span><span>aisle seat</span><span>home: Bristol</span><span>16–25 railcard</span><span>gym Tue/Thu</span>
+        </div>
+        <div class="mock__bubble">Book dinner near the office Thursday</div>
+        <p class="mock__reply">Done: 7:30pm at Wilder, and they've confirmed a vegetarian tasting menu. It's after your gym class.</p>
+      </div>
+    )
+  }
+  {
+    v.kind === "mock" && v.name === "pulse" && (
+      <div class="mock" aria-hidden="true">
+        <div class="mock__card mock__card--violet">
+          <small>Briefing</small>
+          <b>Your day, ahead of you</b>
+          <span>3 meetings, a gap at 2pm. Rain from 4, so leave early for the station.</span>
+        </div>
+        <div class="mock__card mock__card--rose">
+          <small>Action</small>
+          <b>Deposit form due today</b>
+          <span>Jonas replied overnight. Your answer is drafted.</span>
+        </div>
+        <div class="mock__card mock__card--amber">
+          <small>Reminder</small>
+          <b>Mum's birthday Friday</b>
+          <span>Flowers to her office? Last year's florist delivers next day.</span>
+        </div>
+      </div>
+    )
+  }
+  {
+    v.kind === "mock" && v.name === "address" && (
+      <div class="mock" aria-hidden="true">
+        <div class="mock__addr">
+          <i />
+          sam@osmos…
+        </div>
+        <div class="mock__row mock__row--mail">
+          <div>
+            <b>Fwd: Venue for Saturday</b>
+            <span>“Can you chase them for a table for six?”</span>
+          </div>
+        </div>
+        <p class="mock__reply">Chased the venue about Saturday. They replied, and the table for six is booked.</p>
+      </div>
+    )
+  }
+  {
+    v.kind === "mock" && v.name === "computer" && (
+      <div class="mock mock--wide" aria-hidden="true">
+        <div class="mock__browser">
+          <div class="mock__bar"><i /><i /><i /><span>checkout.airline.example</span></div>
+          <div class="mock__steps">
+            <p><em>✓</em> Opened the airline's site</p>
+            <p><em>✓</em> Found reward seats on 14 Oct</p>
+            <p><em>✓</em> Filled in traveller details</p>
+            <p class="now"><em>●</em> Your turn: sign in to your account</p>
+          </div>
+          <div class="mock__actions"><span>Watch live</span><span class="primary">Take over</span></div>
+        </div>
+      </div>
+    )
+  }
+</div>

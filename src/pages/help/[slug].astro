@@ -1,0 +1,122 @@
+---
+import Page from "../../layouts/Page.astro";
+import AppStoreButton from "../../components/AppStoreButton.astro";
+import help from "../../data/help.json";
+import { breadcrumbs, graph, url } from "../../lib/site";
+
+export function getStaticPaths() {
+  return help.articles.map((a, i) => ({
+    params: { slug: a.slug },
+    props: { index: i },
+  }));
+}
+
+const { index } = Astro.props as { index: number };
+const article = help.articles[index];
+const collection = help.collections.find((c) => c.id === article.collection)!;
+const siblings = collection.articles.map((s) => help.articles.find((a) => a.slug === s)!);
+const prev = help.articles[index - 1];
+const next = help.articles[index + 1];
+const path = `/help/${article.slug}`;
+
+// Meta description: the article summary, topped up from its opening text when the summary is short.
+function metaDescription(summary: string, html: string, max = 160) {
+  let out = summary.trim().replace(/([^.!?])$/, "$1.");
+  const body = html
+    .replace(/<h2>.*?<\/h2>/g, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/\s+/g, " ")
+    .replace(/\s+([:;,.!?])/g, "$1")
+    .trim();
+  for (const sentence of body.match(/[^.!?]+[.!?]+/g) ?? []) {
+    if (out.length >= 110) break;
+    const next = `${out} ${sentence.trim()}`;
+    if (next.length <= max) {
+      out = next;
+      continue;
+    }
+    // Too long to add whole: take as many words as fit, then an ellipsis.
+    let cut = out;
+    for (const word of sentence.trim().split(" ")) {
+      if (`${cut} ${word}…`.length > max) break;
+      cut = `${cut} ${word}`;
+    }
+    if (cut !== out) out = `${cut.replace(/[,;:]$/, "")}…`;
+    break;
+  }
+  return out;
+}
+const description = metaDescription(article.description, article.html);
+
+const jsonLd = graph(
+  {
+    "@type": "TechArticle",
+    "@id": url(path),
+    headline: article.title,
+    description: article.description,
+    url: url(path),
+    inLanguage: "en-GB",
+    articleSection: collection.title,
+    about: { "@id": "https://meetosmos.com/#app" },
+    publisher: { "@id": "https://meetosmos.com/#organization" },
+  },
+  breadcrumbs([
+    { name: "Home", path: "/" },
+    { name: "Help centre", path: "/help" },
+    { name: collection.title, path: `/help#${collection.id}` },
+    { name: article.title, path },
+  ]),
+);
+---
+
+<Page title={`${article.title} · osmos help`} description={description} path={path} jsonLd={jsonLd} type="article">
+  <div class="article">
+    <aside class="article__side" aria-label={collection.title}>
+      <h2>{collection.title}</h2>
+      <ul>
+        {
+          siblings.map((a) => (
+            <li>
+              <a href={`/help/${a.slug}`} aria-current={a.slug === article.slug ? "page" : undefined}>
+                {a.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </aside>
+    <article class="article__body">
+      <ol class="crumbs" style="justify-content:flex-start">
+        <li><a href="/help">Help centre</a></li>
+        <li><a href={`/help#${collection.id}`}>{collection.title}</a></li>
+      </ol>
+      <h1>{article.title}</h1>
+      <p class="summary">{article.description}</p>
+      <div class="prose" set:html={article.html} />
+      <nav class="pager" aria-label="More articles">
+        {
+          prev && (
+            <a href={`/help/${prev.slug}`}>
+              <small>Previous</small>
+              <span>{prev.title}</span>
+            </a>
+          )
+        }
+        {
+          next && (
+            <a class="next" href={`/help/${next.slug}`}>
+              <small>Next</small>
+              <span>{next.title}</span>
+            </a>
+          )
+        }
+      </nav>
+    </article>
+  </div>
+  <section class="cta-band">
+    <h2>Try it on your iPhone.</h2>
+    <p>Free to start with 200 credits. You approve every action.</p>
+    <AppStoreButton />
+  </section>
+</Page>

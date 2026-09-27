@@ -1,11 +1,22 @@
 ---
-import "../styles/global.css";
+// Order matters: shared base, then the phone, then homepage sections (which override both).
+import "../styles/base.css";
+import "../styles/device.css";
+import "../styles/home.css";
 import Img from "../components/Img.astro";
+import SiteHead from "../components/SiteHead.astro";
+import SiteNav from "../components/SiteNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { APP_STORE, graph, mobileApp, organization, webPage, website } from "../lib/site";
 import Device from "../components/Device.astro";
 import AppChrome from "../components/AppChrome.astro";
 import AppHome from "../components/AppHome.astro";
+import { homeFaqs } from "../data/faq";
 
-const APP_STORE = "https://apps.apple.com/us/app/osmos-assistant/id6771561683";
+const title = "osmos assistant — the AI super-app that gets things done";
+const description =
+  "osmos assistant is an AI super-app for iPhone. It handles your email, calendar, messages and travel across 60+ apps, and nothing happens without your OK.";
+const jsonLd = graph(organization(), website(), mobileApp(), webPage("/", title, description));
 
 // "|" marks the line break.
 const statement = "The fastest way from | “I need to…” to done.";
@@ -15,16 +26,22 @@ const cards = [
     icon: "icon-shield",
     title: "You approve every action.",
     text: "Sending, booking and paying all wait for your yes. Automation is opt-in, per tool, with limits you set.",
+    href: "/help/what-osmos-will-never-do-on-its-own",
+    more: "What it never does alone",
   },
   {
     icon: "icon-notebook",
     title: "A memory that sticks.",
     text: "Say it once. Preferences, people and plans are remembered, and used the next time it books, drafts or plans.",
+    href: "/memory",
+    more: "How memory works",
   },
   {
     icon: "icon-bolt",
     title: "Ahead of your day.",
     text: "Pulse checks your apps while you're busy and surfaces only what needs you: a briefing, a nudge, a drafted reply.",
+    href: "/pulse",
+    more: "Pulse and routines",
   },
 ] as const;
 
@@ -51,51 +68,25 @@ const logos = [
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>osmos — the world's first AI super-app</title>
-    <meta
-      name="description"
-      content="Ask for anything and consider it done. osmos reads your inbox, books your travel, remembers the little things and stays ahead of your day, across 60+ of your apps. You approve every action."
-    />
-    <meta name="theme-color" content="#050409" />
-    <meta property="og:title" content="osmos — the world's first AI super-app" />
-    <meta property="og:description" content="One agent for your inbox, plans and payments. It acts, you approve." />
-    <meta property="og:url" content="https://meetosmos.com" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://meetosmos.com/og.jpg" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="canonical" href="https://meetosmos.com/" />
-    <link rel="icon" href="/brand/osmos-mark-64.png" type="image/png" />
-    <link rel="apple-touch-icon" href="/brand/osmos-mark-180.png" />
-    <link rel="preload" href="/img/horizon-poster-1280.webp" as="image" fetchpriority="high" />
-    <link rel="preload" href="/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/sulphur-point-700.woff2" as="font" type="font/woff2" crossorigin />
-    <script is:inline>
-      // Play the intro once per session, and never for reduced motion.
-      (function () {
-        try {
-          var skip = navigator.webdriver || /[?&]nointro\b/.test(location.search);
-          if (!skip && !matchMedia("(prefers-reduced-motion: reduce)").matches && !sessionStorage.getItem("osmos-intro")) {
-            document.documentElement.classList.add("has-intro");
-          }
-        } catch (e) {}
-        document.documentElement.classList.add("js");
-        if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-      })();
-    </script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MME55MLNDQ"></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-MME55MLNDQ");
-    </script>
+    <SiteHead title={title} description={description} path="/" jsonLd={jsonLd}>
+      <link rel="preload" href="/img/horizon-poster-1280.webp" as="image" fetchpriority="high" />
+      <link rel="preload" href="/fonts/sulphur-point-700.woff2" as="font" type="font/woff2" crossorigin />
+      <script is:inline>
+        // Play the intro once per session, and never for reduced motion.
+        (function () {
+          try {
+            var skip = navigator.webdriver || /[?&]nointro\b/.test(location.search);
+            if (!skip && !matchMedia("(prefers-reduced-motion: reduce)").matches && !sessionStorage.getItem("osmos-intro")) {
+              document.documentElement.classList.add("has-intro");
+            }
+          } catch (e) {}
+          document.documentElement.classList.add("js");
+          if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+        })();
+      </script>
+    </SiteHead>
   </head>
 
   <body>
@@ -132,19 +123,7 @@ const logos = [
     </div>
 
     <!-- ============ NAV ============ -->
-    <header class="nav" data-nav>
-      <a href="/" class="nav__logo" aria-label="osmos home">
-        <img src="/brand/osmos-wordmark-white.webp" alt="osmos" width="657" height="153" />
-      </a>
-      <a href={APP_STORE} class="nav__cta">
-        <svg viewBox="0 0 384 512" width="13" height="13" fill="currentColor" aria-hidden="true"
-          ><path
-            d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.7-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
-          ></path></svg
-        >
-        Get the app
-      </a>
-    </header>
+    <SiteNav />
 
     <main>
       <!-- ============ HERO + STORY ============ -->
@@ -181,7 +160,7 @@ const logos = [
           </div>
 
           <div class="hero__copy" data-hero-copy>
-            <p class="eyebrow" data-hero-in>The world's first AI super-app</p>
+            <p class="eyebrow" data-hero-in>osmos assistant · the world's first AI super-app</p>
             <h1 class="display h-xl" data-hero-in>Ask for anything.<br /><span class="dim">Consider it done.</span></h1>
             <div class="hero__ctas" data-hero-in>
               <a href={APP_STORE} class="appstore">
@@ -192,7 +171,7 @@ const logos = [
                 >
                 <span><small>Download on the</small> App Store</span>
               </a>
-              <span class="hero__note">Free to start · 100 credits on us</span>
+              <span class="hero__note">Free to start · 200 credits on us</span>
             </div>
           </div>
 
@@ -382,6 +361,7 @@ const logos = [
                   <Img id={c.icon} sizes="220px" alt="" />
                   <h3>{c.title}</h3>
                   <p>{c.text}</p>
+                  <a class="more" href={c.href}>{c.more}</a>
                 </article>
               ))
             }
@@ -481,6 +461,7 @@ const logos = [
             <article class="tile tile--wide" data-reveal>
               <h3>Your inbox, handled.</h3>
               <p>Connect Gmail or Outlook. osmos triages the noise, flags what needs you and drafts replies before you open the thread.</p>
+              <a class="more" href="/email">More on email</a>
               <div class="inbox" aria-hidden="true">
                 <div class="inbox__row">
                   <span class="inbox__av" style="background:#c2410c">AR</span>
@@ -509,6 +490,7 @@ const logos = [
               <div class="tile__glow"></div>
               <h3>Plans that book themselves.</h3>
               <p>Trains, flights and hotels, searched and held. osmos pays with your saved card the moment you approve.</p>
+              <a class="more" href="/travel">More on travel</a>
               <div class="mini-phone">
                 <Device>
                   <div class="layer"><Img id="screen-travel" sizes="250px" alt="osmos showing Eurostar options from London St Pancras to Paris Nord" /></div>
@@ -520,12 +502,14 @@ const logos = [
               <Img id="icon-envelope" class="tile__icon" sizes="120px" alt="" />
               <h3>Its own email address.</h3>
               <p>osmos writes from its own address on your behalf, chasing replies and arranging meetings, and keeps going when people write back.</p>
+              <a class="more" href="/help/inbox-app-and-your-osmos-address">About your osmos address</a>
               <span class="addr"><i></i>sam@osmos…</span>
             </article>
 
             <article class="tile tile--pulse" data-reveal style="--d:.08s">
               <h3>Ahead of your day.</h3>
               <p>A briefing before the day starts, a nudge before something slips.</p>
+              <a class="more" href="/pulse">More on Pulse</a>
               <div class="pnote">
                 <small>Action</small>
                 <b>Deposit form due today</b>
@@ -540,6 +524,7 @@ const logos = [
             <article class="tile tile--wide" data-reveal>
               <h3>Works with 60+ apps.</h3>
               <p>Plus your email and calendars. Connect what you use, and ask about any of it.</p>
+              <a class="more" href="/help/tool-manager-everything-osmos-can-use">See every connection</a>
               <div class="logos" data-logos>
                 {
                   logos.map(([name, slug]) => (
@@ -554,6 +539,7 @@ const logos = [
             <article class="tile" data-reveal style="--d:.08s">
               <Img id="icon-card" class="tile__icon" sizes="120px" alt="" />
               <h3>Spending with guardrails.</h3>
+              <a class="more" href="/help/wallet-your-card-your-limits-your-tickets">How spending limits work</a>
               <div class="toggles" aria-hidden="true">
                 <div class="toggle"><span>Ask before every purchase</span><i></i></div>
                 <div class="toggle"><span>Cap per booking</span><b>£250</b></div>
@@ -595,6 +581,22 @@ const logos = [
         </div>
       </section>
 
+      <!-- ============ FAQ ============ -->
+      <section class="home-faq" aria-label="Questions">
+        <h2 class="display h-lg" data-reveal>Questions, answered.</h2>
+        <div class="faq" data-reveal style="--d:.08s">
+          {
+            homeFaqs.map((f) => (
+              <details>
+                <summary>{f.q}</summary>
+                <div class="faq__a" set:html={f.a} />
+              </details>
+            ))
+          }
+        </div>
+        <p class="home-faq__more" data-reveal style="--d:.12s"><a href="/faq">All questions</a> · <a href="/help">Help centre</a></p>
+      </section>
+
       <!-- ============ CTA ============ -->
       <section class="cta" data-cta>
         <h2 class="display h-xl" data-reveal>Your agent is waiting.</h2>
@@ -621,21 +623,7 @@ const logos = [
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="footer__top">
-        <h2>Questions? Say hello.</h2>
-        <a class="footer__mail" href="mailto:hello@meetosmos.com">hello@meetosmos.com</a>
-      </div>
-      <div class="footer__bottom">
-        <img src="/brand/osmos-wordmark-white.webp" alt="osmos" width="657" height="153" loading="lazy" />
-        <nav aria-label="Legal">
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms of Use</a>
-          <a href="mailto:hello@meetosmos.com">Contact</a>
-        </nav>
-        <span>© 2026 Brightboard AI LTD</span>
-      </div>
-    </footer>
+    <SiteFooter overlap />
 
     <script>
       import "../scripts/site";

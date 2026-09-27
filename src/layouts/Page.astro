@@ -1,0 +1,48 @@
+---
+// Inner-page shell: shared head, nav with links, footer. No animation bundle.
+import "../styles/base.css";
+import "../styles/pages.css";
+import SiteHead from "../components/SiteHead.astro";
+import SiteNav from "../components/SiteNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  jsonLd?: object;
+  type?: "website" | "article";
+  noindex?: boolean;
+}
+const { title, description, path, jsonLd, type, noindex } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <SiteHead title={title} description={description} path={path} jsonLd={jsonLd} type={type} noindex={noindex} />
+  </head>
+  <body>
+    <SiteNav links />
+    <main class="page">
+      <slot />
+    </main>
+    <SiteFooter />
+    <script is:inline>
+      // Glass behind the logo once the page scrolls; mark the current section in the nav.
+      (function () {
+        var nav = document.querySelector("[data-nav]");
+        var set = function () {
+          nav.classList.toggle("is-scrolled", window.scrollY > 40);
+        };
+        addEventListener("scroll", set, { passive: true });
+        set();
+        var here = location.pathname;
+        document.querySelectorAll(".nav__links a").forEach(function (a) {
+          var href = a.getAttribute("href");
+          if (here === href || (href !== "/" && here.indexOf(href + "/") === 0)) a.setAttribute("aria-current", "page");
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+---
+// Shared <head> contents: meta, social cards, icons, fonts, analytics and JSON-LD.
+import { url } from "../lib/site";
+
+interface Props {
+  title: string;
+  description: string;
+  path: string; // canonical path, e.g. "/" or "/help/how-chat-works"
+  image?: string;
+  type?: "website" | "article";
+  jsonLd?: object;
+  noindex?: boolean;
+}
+const { title, description, path, image = "https://meetosmos.com/og.jpg", type = "website", jsonLd, noindex = false } = Astro.props;
+const canonical = url(path);
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex" />}
+<meta name="theme-color" content="#050409" />
+<meta property="og:site_name" content="osmos assistant" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:type" content={type} />
+<meta property="og:image" content={image} />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="/brand/osmos-mark-64.png" type="image/png" />
+<link rel="apple-touch-icon" href="/brand/osmos-mark-180.png" />
+<link rel="preload" href="/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+<slot />
+{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MME55MLNDQ"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "G-MME55MLNDQ");
+</script>

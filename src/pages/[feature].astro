@@ -1,0 +1,132 @@
+---
+import Page from "../layouts/Page.astro";
+import AppStoreButton from "../components/AppStoreButton.astro";
+import FeatureVisual from "../components/FeatureVisual.astro";
+import Img from "../components/Img.astro";
+import { features, type Feature } from "../data/features";
+import help from "../data/help.json";
+import { breadcrumbs, faqPage, graph, webPage } from "../lib/site";
+
+export function getStaticPaths() {
+  return features.map((f) => ({ params: { feature: f.slug }, props: { f } }));
+}
+
+const { f } = Astro.props as { f: Feature };
+const path = `/${f.slug}`;
+const related = f.related.map((s) => help.articles.find((a) => a.slug === s)!).filter(Boolean);
+const others = features.filter((o) => o.slug !== f.slug);
+const jsonLd = graph(
+  webPage(path, f.h1, f.description),
+  faqPage(f.faqs, path),
+  breadcrumbs([
+    { name: "Home", path: "/" },
+    { name: f.nav, path },
+  ]),
+);
+---
+
+<Page title={f.title} description={f.description} path={path} jsonLd={jsonLd}>
+  <section class="band feature-hero">
+    <div class="split">
+      <div>
+        <ol class="crumbs" style="justify-content:flex-start">
+          <li><a href="/">Home</a></li>
+          <li>{f.nav}</li>
+        </ol>
+        <p class="kicker" style="margin-top:22px">{f.eyebrow}</p>
+        <h1>{f.h1}</h1>
+        <p class="lede">{f.lede}</p>
+        <div style="margin-top:28px"><AppStoreButton /></div>
+      </div>
+      <FeatureVisual v={f.hero} eager />
+    </div>
+  </section>
+
+  {
+    f.sections.map((s, i) => (
+      <section class="band">
+        <div class={`split ${i % 2 === 0 ? "split--flip" : ""}`}>
+          <div>
+            <p class="kicker">{s.kicker}</p>
+            <h2>{s.title}</h2>
+            <Fragment set:html={s.body} />
+            {s.bullets && (
+              <ul>
+                {s.bullets.map((b) => (
+                  <li>{b}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <FeatureVisual v={s.visual} />
+        </div>
+      </section>
+    ))
+  }
+
+  <section class="band band--narrow">
+    <div class="callout">
+      <Img id={f.callout.icon as any} sizes="84px" alt="" />
+      <div>
+        <h2>{f.callout.title}</h2>
+        <ul>
+          {f.callout.items.map((it) => <li>{it}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--narrow">
+    <div class="band__head">
+      <p class="kicker">Questions</p>
+      <h2>{f.nav}: the details.</h2>
+    </div>
+    <div class="faq">
+      {
+        f.faqs.map((q) => (
+          <details>
+            <summary>{q.q}</summary>
+            <div class="faq__a">
+              <p>{q.a}</p>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="cards cards--2">
+      <div class="card">
+        <h3>In the help centre</h3>
+        <ul class="linklist">
+          {
+            related.map((a) => (
+              <li>
+                <a href={`/help/${a.slug}`}>{a.title}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="card">
+        <h3>More of what osmos does</h3>
+        <ul class="linklist">
+          {
+            others.map((o) => (
+              <li>
+                <a href={`/${o.slug}`}>{o.h1.replace(/\.$/, "")}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <h2>Try it on your iPhone.</h2>
+    <p>Free to start with 200 credits. You approve every action.</p>
+    <AppStoreButton />
+  </section>
+</Page>

@@ -1,0 +1,77 @@
+---
+// Shared footer: contact, and the internal links every page carries.
+import { APP_NAME, CONTACT } from "../lib/site";
+
+interface Props {
+  overlap?: boolean; // homepage: rides up over the CTA scene
+}
+const { overlap = false } = Astro.props;
+
+const cols = [
+  {
+    title: "Features",
+    links: [
+      ["Email", "/email"],
+      ["Travel", "/travel"],
+      ["Memory", "/memory"],
+      ["Pulse and routines", "/pulse"],
+      ["Computer Use", "/computer"],
+    ],
+  },
+  {
+    title: "Help",
+    links: [
+      ["Help centre", "/help"],
+      ["FAQ", "/faq"],
+      ["Getting started", "/help/your-first-ten-minutes"],
+      ["Plans and pricing", "/help/plans-and-pricing"],
+    ],
+  },
+  {
+    title: "Compare",
+    links: [
+      ["osmos vs ChatGPT", "/compare/chatgpt"],
+      ["osmos vs Siri", "/compare/siri"],
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      ["Privacy Policy", "/privacy"],
+      ["Terms of Use", "/terms"],
+      ["Contact", `mailto:${CONTACT}`],
+    ],
+  },
+];
+---
+
+<footer class={`footer ${overlap ? "footer--overlap" : ""}`}>
+  <div class="footer__top">
+    <h2>Questions? Say hello.</h2>
+    <a class="footer__mail" href={`mailto:${CONTACT}`}>{CONTACT}</a>
+  </div>
+  <div class="footer__cols">
+    <div class="footer__brand">
+      <img src="/brand/osmos-wordmark-white.webp" alt="osmos" width="657" height="153" loading="lazy" />
+      <p>{APP_NAME}: one chat for your email, calendar, messages and travel, on iPhone.</p>
+    </div>
+    {
+      cols.map((c) => (
+        <nav class="footer__col" aria-label={c.title}>
+          <h3>{c.title}</h3>
+          <ul>
+            {c.links.map(([label, href]) => (
+              <li>
+                <a href={href}>{label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))
+    }
+  </div>
+  <div class="footer__bottom">
+    <span>© 2026 Brightboard AI LTD</span>
+    <span>Made for iPhone</span>
+  </div>
+</footer>

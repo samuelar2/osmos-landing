@@ -1,0 +1,86 @@
+---
+import Page from "../../layouts/Page.astro";
+import help from "../../data/help.json";
+import { breadcrumbs, graph, webPage } from "../../lib/site";
+
+const bySlug = Object.fromEntries(help.articles.map((a) => [a.slug, a]));
+const title = "Help centre · osmos assistant";
+const description =
+  "How osmos assistant works: email and calendar, memory, routines, travel and Wallet, Computer Use, plans and credits, privacy, and fixes for common problems.";
+const jsonLd = graph(
+  webPage("/help", "osmos help centre", description, "CollectionPage"),
+  breadcrumbs([
+    { name: "Home", path: "/" },
+    { name: "Help centre", path: "/help" },
+  ]),
+);
+---
+
+<Page title={title} description={description} path="/help" jsonLd={jsonLd}>
+  <header class="page-hero">
+    <ol class="crumbs">
+      <li><a href="/">Home</a></li>
+      <li>Help centre</li>
+    </ol>
+    <h1>How can we help?</h1>
+    <p class="lede">
+      How osmos works, what it can and can't do, and how to get the most out of it. {help.articles.length} articles.
+    </p>
+    <div class="help-search">
+      <label class="sr-only" for="help-q">Search the help centre</label>
+      <input id="help-q" type="search" placeholder="Search, e.g. WhatsApp, credits, refunds" autocomplete="off" data-help-q />
+    </div>
+  </header>
+
+  <section class="band" style="padding-top:0">
+    <div class="help-grid" data-help-grid>
+      {
+        help.collections.map((c) => (
+          <section class="card help-coll" id={c.id} data-coll>
+            <h2>{c.title}</h2>
+            <p>{c.description}</p>
+            <ul>
+              {c.articles.map((s) => (
+                <li data-text={`${bySlug[s].title} ${bySlug[s].description}`.toLowerCase()}>
+                  <a href={`/help/${s}`}>{bySlug[s].title}</a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+    <p class="help-empty" data-help-empty hidden>
+      Nothing matches that. Try another word, or ask <a href="mailto:hello@meetosmos.com">hello@meetosmos.com</a>.
+    </p>
+  </section>
+
+  <section class="cta-band">
+    <h2>Still stuck?</h2>
+    <p>In the app, Core → Help opens a chat with the osmos team. Or email us, we read everything.</p>
+    <a class="appstore" href="mailto:hello@meetosmos.com"><span>hello@meetosmos.com</span></a>
+  </section>
+
+  <script is:inline>
+    (function () {
+      var q = document.querySelector("[data-help-q]");
+      var colls = document.querySelectorAll("[data-coll]");
+      var empty = document.querySelector("[data-help-empty]");
+      q.addEventListener("input", function () {
+        var v = q.value.trim().toLowerCase();
+        var any = false;
+        colls.forEach(function (c) {
+          var shown = 0;
+          c.querySelectorAll("li").forEach(function (li) {
+            var hit = !v || li.dataset.text.indexOf(v) !== -1;
+            li.hidden = !hit;
+            if (hit) shown++;
+          });
+          c.hidden = shown === 0;
+          if (shown) any = true;
+        });
+        empty.hidden = any;
+      });
+    })();
+  </script>
+</Page>

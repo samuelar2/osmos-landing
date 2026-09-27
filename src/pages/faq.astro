@@ -1,0 +1,54 @@
+---
+import Page from "../layouts/Page.astro";
+import AppStoreButton from "../components/AppStoreButton.astro";
+import { faqGroups, allFaqs } from "../data/faq";
+import help from "../data/help.json";
+import { breadcrumbs, faqPage, graph, webPage } from "../lib/site";
+
+const title = "FAQ · osmos assistant";
+const description =
+  "Answers about osmos assistant: what it is, how it differs from ChatGPT and Siri, which apps it works with, plans and credits, privacy, bookings and Computer Use.";
+const jsonLd = graph(
+  webPage("/faq", "osmos FAQ", description),
+  faqPage(allFaqs.map(({ q, a }) => ({ q, a })), "/faq"),
+  breadcrumbs([
+    { name: "Home", path: "/" },
+    { name: "FAQ", path: "/faq" },
+  ]),
+);
+---
+
+<Page title={title} description={description} path="/faq" jsonLd={jsonLd}>
+  <header class="page-hero">
+    <ol class="crumbs">
+      <li><a href="/">Home</a></li>
+      <li>FAQ</li>
+    </ol>
+    <h1>Questions, answered.</h1>
+    <p class="lede">The short version of how osmos works. For the long version, the <a href="/help" style="color:var(--violet-2)">help centre</a> has {help.articles.length} articles.</p>
+  </header>
+
+  <section class="band band--narrow" style="padding-top:0">
+    {
+      faqGroups.map((g) => (
+        <div class="faq-group">
+          <h2>{g.title}</h2>
+          <div class="faq">
+            {g.items.map((f) => (
+              <details>
+                <summary>{f.q}</summary>
+                <div class="faq__a" set:html={f.a} />
+              </details>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </section>
+
+  <section class="cta-band">
+    <h2>Ask osmos anything.</h2>
+    <p>Free to start with 200 credits. You approve every action.</p>
+    <AppStoreButton />
+  </section>
+</Page>

@@ -1,0 +1,460 @@
+{
+ "collections": [
+  {
+   "id": "getting-started",
+   "title": "Getting started",
+   "description": "What osmos is, how the app is laid out, and what to do first.",
+   "articles": [
+    "what-osmos-is-and-what-it-isnt",
+    "your-first-ten-minutes",
+    "the-three-tabs-chat-apps-core",
+    "signing-in-and-why-support-may-ask-for-your-account-id",
+    "getting-help-inside-the-app"
+   ]
+  },
+  {
+   "id": "chat-and-the-home-card",
+   "title": "Chat and the Home card",
+   "description": "How chat works, what the Home card is, and why osmos sometimes messages you first.",
+   "articles": [
+    "how-chat-works",
+    "the-home-card-explained",
+    "why-did-osmos-message-me",
+    "how-osmos-remembers",
+    "photos-files-and-links-in-chat",
+    "setting-osmoss-name-tone-and-rules"
+   ]
+  },
+  {
+   "id": "apps-and-connections",
+   "title": "Apps and connections",
+   "description": "Connecting email, calendar, messaging and other tools, and what each one lets osmos do.",
+   "articles": [
+    "tool-manager-everything-osmos-can-use",
+    "email-gmail-and-outlook",
+    "inbox-app-and-your-osmos-address",
+    "calendar-and-ical-feeds",
+    "whatsapp",
+    "slack",
+    "reminders-and-tasks",
+    "third-party-tools-on-pro"
+   ]
+  },
+  {
+   "id": "notes-and-files",
+   "title": "Notes and Files",
+   "description": "Typed notes, recorded meetings, and the documents osmos keeps for you.",
+   "articles": [
+    "notes-and-recorded-meetings",
+    "action-items-chase-remind-me-and-follow-ups-from-a-note",
+    "files-and-the-osmos-folder"
+   ]
+  },
+  {
+   "id": "routines-and-active-agents",
+   "title": "Routines and Active Agents",
+   "description": "Work osmos does on a schedule, and commitments it keeps on its own.",
+   "articles": [
+    "routines-scheduled-work",
+    "active-agents-what-a-follow-up-actually-does",
+    "what-osmos-will-never-do-on-its-own"
+   ]
+  },
+  {
+   "id": "travel-bookings-and-wallet",
+   "title": "Travel, bookings and Wallet",
+   "description": "Booking flights, hotels and trains, paying safely, and what happens when plans change.",
+   "articles": [
+    "wallet-your-card-your-limits-your-tickets",
+    "booking-flights-hotels-and-trains",
+    "paying-and-approvals",
+    "changes-refunds-and-rebooking",
+    "places-and-restaurant-reservations"
+   ]
+  },
+  {
+   "id": "computer-use",
+   "title": "Computer Use",
+   "description": "A real computer osmos can drive for you, on every plan.",
+   "articles": [
+    "what-computer-use-is",
+    "watch-live-take-over-give-back",
+    "minutes-limits-and-cost",
+    "what-the-computer-will-never-do-and-about-your-logins"
+   ]
+  },
+  {
+   "id": "plans-credits-and-usage",
+   "title": "Plans, credits and usage",
+   "description": "What credits are, what uses them, what each plan includes, and what happens when they run out.",
+   "articles": [
+    "credits-explained",
+    "plans-and-pricing",
+    "out-of-credits-what-pauses",
+    "the-usage-page"
+   ]
+  },
+  {
+   "id": "privacy-security-and-your-account",
+   "title": "Privacy, security and your account",
+   "description": "Where your data goes, how it's protected, and how to export or delete it.",
+   "articles": [
+    "your-data-and-where-it-goes",
+    "exporting-or-deleting-your-data",
+    "app-lock-and-face-id",
+    "notifications-what-osmos-sends-and-how-to-tune-it",
+    "timezone-and-travel"
+   ]
+  },
+  {
+   "id": "troubleshooting-and-known-limits",
+   "title": "Troubleshooting and known limits",
+   "description": "Error messages, connections that stop working, and the things osmos gets wrong.",
+   "articles": [
+    "common-error-messages",
+    "a-connection-stopped-working",
+    "osmos-is-slow-or-not-replying",
+    "things-osmos-can-get-wrong",
+    "requesting-a-feature"
+   ]
+  }
+ ],
+ "articles": [
+  {
+   "slug": "what-osmos-is-and-what-it-isnt",
+   "collection": "getting-started",
+   "title": "What osmos is (and what it isn't)",
+   "description": "A personal agent that reads what you connect, acts on your behalf, and comes back to you. Also the things it can't do.",
+   "html": "<p>osmos is a personal agent. You talk to it in chat, connect the accounts you want it to see (email, calendar, WhatsApp, Slack and more), and it does work for you: answers, drafts, bookings, reminders, and jobs it carries on with after you've closed the app.</p><p>Three things make it different from a chatbot:</p><ul><li><strong>It remembers.</strong> Facts from your conversations and connected accounts build up over time, so you don't repeat yourself.</li><li><strong>It runs on its own.</strong> Routines run on a schedule, follow-ups check back later, and the Home card surfaces what matters without you asking.</li><li><strong>It can act.</strong> With your card in Wallet it can book flights, hotels and trains. It can also drive a real computer.</li></ul><h2>What it isn't</h2><ul><li>It is not always right. It can misread a date, miss an email, or state something confidently that is wrong. Treat it like a capable assistant, not an oracle, and check anything that matters.</li><li>It does not act on your behalf without a signal from you. Money, sending messages, and anything hard to undo either needs your approval in the moment or a rule you set up.</li><li>It only sees what you connect. If your calendar isn't connected, it doesn't know your calendar.</li><li>It is iPhone only for now, and works best in English.</li></ul>"
+  },
+  {
+   "slug": "your-first-ten-minutes",
+   "collection": "getting-started",
+   "title": "Your first ten minutes",
+   "description": "The five things worth doing first so osmos is useful from day one.",
+   "html": "<ol><li><strong>Connect email and calendar.</strong> Core → Tool manager. osmos gets far more useful once it can see your inbox and your day.</li><li><strong>Tell it about yourself.</strong> Say who you are, what you do, and how you like things done. It remembers.</li><li><strong>Ask something real.</strong> \"What's on this week?\", \"Summarise the thread from Priya\", \"When did I last email the accountant?\"</li><li><strong>Set up one routine.</strong> A morning briefing is the classic. Core → Routines.</li><li><strong>Allow notifications.</strong> osmos only interrupts for things it thinks you'd want to know before you next open the app, and you control the hours.</li></ol><p>You can also say <em>show me the app tour</em> in chat at any time.</p>"
+  },
+  {
+   "slug": "the-three-tabs-chat-apps-core",
+   "collection": "getting-started",
+   "title": "The three tabs: Chat, Apps, Core",
+   "description": "Where everything lives in the app.",
+   "html": "<h2>Chat</h2><p>Your Home card sits at the top: the one thing osmos thinks deserves your attention right now. Below it, the chat. Everything you and osmos have said is one continuous thread, including messages osmos sent you on its own.</p><h2>Apps</h2><p>The mini apps: Inbox, Notes, Files, Wallet, Calendar, Reminders, travel and more. Each is a focused screen for one kind of thing. They all feed the same agent, so anything you see in an app you can also ask about in chat.</p><h2>Core</h2><ul><li><strong>Routines</strong>: scheduled jobs osmos runs for you.</li><li><strong>Active Agents</strong>: follow-ups osmos has promised to come back to.</li><li><strong>Tool manager</strong>: every connection and app, and their settings.</li><li><strong>Usage</strong>: credits, activity, and computer time.</li><li><strong>Profile</strong>: your name, tone, quiet hours, plan, security, data.</li><li><strong>Help</strong>: this help centre, and a way to message us.</li></ul>"
+  },
+  {
+   "slug": "signing-in-and-why-support-may-ask-for-your-account-id",
+   "collection": "getting-started",
+   "title": "Signing in, and why support may ask for your account ID",
+   "description": "Sign in with Apple or email, and what 'Hide My Email' means for support.",
+   "html": "<p>You can sign in with Apple or with an email address and password. If you used Sign in with Apple and chose <em>Hide My Email</em>, osmos sees a private relay address, not your real one. That's fine for the app, but it means support can't find you by your normal email. Your account ID is in Core → Profile; include it when you write to us.</p><p>Forgot your password? Use <em>Reset password</em> on the sign-in screen. The reset link opens the app directly; if it opens in the browser instead, open the app and try again from the link.</p><blockquote>One account per person. osmos's memory, connections and history are all tied to the account you sign in with.</blockquote>"
+  },
+  {
+   "slug": "getting-help-inside-the-app",
+   "collection": "getting-started",
+   "title": "Getting help inside the app",
+   "description": "The Help tile, the app tour, and what to include when you write to us.",
+   "html": "<p>Core → Help opens this help centre and a chat with the osmos team. You can also report a problem or request a feature from the same place.</p><p>When you report a problem, the most useful things to include are what you asked, what you expected, what happened instead, and roughly when. Screenshots help. Your account ID (Core → Profile) lets us look at the right account.</p><p>For a guided walk through the app, say <em>show me the app tour</em> in chat.</p>"
+  },
+  {
+   "slug": "how-chat-works",
+   "collection": "chat-and-the-home-card",
+   "title": "How chat works",
+   "description": "One thread, tools it uses on the way, and what the small grey lines mean.",
+   "html": "<p>Chat is one continuous conversation. You don't start new chats; everything stays in one thread, and osmos's own messages (routine results, follow-up updates, things it flagged) appear in the same place.</p><p>When osmos works on something, you'll see short grey lines under your message: <em>Searched email</em>, <em>Recalled</em>, <em>9 steps</em>. Those are the tools it used. Tap one to expand it. If an answer looks wrong, this is the first place to look: it shows what osmos actually checked.</p><h2>Tips</h2><ul><li>Be specific about time. \"Thursday\" is ambiguous; \"this Thursday\" or \"Thursday the 11th\" isn't.</li><li>Ask it to check its work. \"Are you sure? Look at the email again\" often fixes a misread.</li><li>You can attach photos, documents and links with the + button. Photos are read by a vision model, so a screenshot of a booking works.</li><li>Long answers can be interrupted. Send your next message and osmos moves on.</li></ul>"
+  },
+  {
+   "slug": "the-home-card-explained",
+   "collection": "chat-and-the-home-card",
+   "title": "The Home card, explained",
+   "description": "osmos picks the one thing worth your attention and puts it at the top of Chat.",
+   "html": "<p>The card at the top of Chat is chosen by osmos, not by you. Several times a day, and whenever something urgent lands, it looks across your email, calendar, tasks, messages and recent chat and decides what, if anything, deserves the spot. Most of the time that's one or two items; often it's nothing, which is normal.</p><h2>The three kinds</h2><ul><li><strong>Briefing</strong>: something osmos prepared, like a morning summary.</li><li><strong>Action</strong>: something to deal with now, like a failing connection or an invoice due today.</li><li><strong>Reminder</strong>: something coming up.</li></ul><p>Tap the button on the card to act on it. Tap × to dismiss it. Dismissing is a strong signal: osmos won't bring the same thing back unless there's a new reason.</p><h2>Dates on the card</h2><p>When a card is about a moment in time, the day and time under the heading are computed by osmos's servers from the event's actual date, in your timezone. osmos isn't allowed to write \"tonight\" or \"tomorrow\" itself, precisely because it once got that wrong.</p>"
+  },
+  {
+   "slug": "why-did-osmos-message-me",
+   "collection": "chat-and-the-home-card",
+   "title": "Why did osmos message me?",
+   "description": "Texted items, quiet hours, and the daily limit on interruptions.",
+   "html": "<p>osmos sends you a message (a push plus a line in chat) when it rates something as urgent enough to be told before you next open the app: a deadline that moved, money at risk, someone waiting on you. Everything else stays on the Home card without a notification.</p><h2>The rules it works to</h2><ul><li><strong>Quiet hours.</strong> Set your active hours in Core → Profile. Outside them, only the most urgent items get through; the rest wait on the card.</li><li><strong>A daily limit.</strong> osmos gives itself at most five unrequested messages in any 24 hours, and at most two from any single check. Routines you scheduled yourself don't count against this.</li><li><strong>Once per situation.</strong> The same thing won't text you twice; it will only update the card.</li></ul><p>If a message was wrong or unwelcome, dismiss the card. That teaches the next pass. If it keeps happening, tell us via Help; it's exactly the kind of thing we want to hear about.</p>"
+  },
+  {
+   "slug": "how-osmos-remembers",
+   "collection": "chat-and-the-home-card",
+   "title": "How osmos remembers",
+   "description": "What memory is, where it comes from, and its limits.",
+   "html": "<p>osmos keeps a memory of what it learns about you: names, preferences, plans, decisions, the way you like things done. It builds this from your conversations and from the accounts you connect. That's why the second week is better than the first.</p><p>You can ask what it remembers: \"What do you know about my trip in October?\" If something is wrong, tell it in chat and it will stop using it.</p><h2>Limits</h2><ul><li>Memory is retrieval, not a perfect record. osmos recalls what seems relevant to the current question, so it can miss something you told it long ago. Restating the important thing never hurts.</li><li>It remembers facts, not every word. Don't rely on it to reproduce a long message verbatim; ask it to find the original instead.</li><li>Memory belongs to your account and is deleted with it.</li></ul>"
+  },
+  {
+   "slug": "photos-files-and-links-in-chat",
+   "collection": "chat-and-the-home-card",
+   "title": "Photos, files and links in chat",
+   "description": "What osmos can read from an attachment and what it can't.",
+   "html": "<p>Use the + button to attach a photo, take one, or add a document. osmos reads images with a vision model, so screenshots of bookings, menus, tickets and whiteboards all work. Documents are saved to Files and can be read back in later chats.</p><p>Paste a link and osmos reads the page for you. It reads what a normal visitor can see; it can't get behind logins or paywalls.</p><h2>Good to know</h2><ul><li>Handwriting and low-light photos are read less reliably. If a number matters, say it in text as well.</li><li>Very large documents are summarised rather than read in full in one go.</li><li>You can also share into osmos from other apps with the iPhone share sheet: text, links and images.</li></ul>"
+  },
+  {
+   "slug": "setting-osmoss-name-tone-and-rules",
+   "collection": "chat-and-the-home-card",
+   "title": "Setting osmos's name, tone and rules",
+   "description": "Personalising how it speaks and standing instructions it should follow.",
+   "html": "<p>In Core → Profile you can give your assistant a name and choose a tone. Both change how it writes, not what it can do.</p><p>For standing instructions, just tell it in chat: \"Always use 24-hour times\", \"Never book anything without asking\", \"Call me Sam\". Rules you state clearly are remembered and applied. If one stops being followed, restate it; that's the reliable fix.</p>"
+  },
+  {
+   "slug": "tool-manager-everything-osmos-can-use",
+   "collection": "apps-and-connections",
+   "title": "Tool manager: everything osmos can use",
+   "description": "Where connections live, what 'Always on' means, and how to switch things off.",
+   "html": "<p>Core → Tool manager lists everything osmos can use for you: connected accounts (Gmail, Outlook, Slack, WhatsApp...), the built-in apps that are always available (Notes, Files, Reminders, Wallet...), and any third-party tools you've added.</p><p>Each row has its own settings. Some, like Notes and Files, are marked <em>Always on</em>: they're part of osmos and can't be removed, but their behaviour can be adjusted.</p><h2>Connecting</h2><p>Tap a tool, then <em>Connect</em>. You'll be sent to the provider's own sign-in page; osmos never sees your password, it receives a permission token from the provider. You can revoke it at any time here or from the provider's own security settings.</p><h2>Disconnecting</h2><p>Disconnecting stops osmos reading from that account from then on. Things it already learned stay in memory until you delete them or your account.</p>"
+  },
+  {
+   "slug": "email-gmail-and-outlook",
+   "collection": "apps-and-connections",
+   "title": "Email: Gmail and Outlook",
+   "description": "What osmos can do with your mail, and the 'Google hasn't verified this app' screen.",
+   "html": "<p>Connect Gmail or Outlook and osmos can search, read, summarise and draft. Ask \"What did the landlord say?\" or \"Draft a reply to Ben saying Thursday works\". Drafts are shown to you first; nothing is sent unless you say so.</p><h2>The Google warning screen</h2><p>Gmail is connected through a partner service while Google's own verification of osmos is in progress, so Google may show a screen saying the app isn't verified. Continuing is safe: the permission is the same as any mail app, and you can revoke it from your Google account at any time. This screen goes away once verification completes.</p><h2>Limits</h2><ul><li>osmos reads mail that's in your mailbox. It doesn't get mail your provider has already filtered elsewhere.</li><li>Several accounts can be connected; searches cover all of them.</li><li>Sending from a connected account requires that account's send permission. If drafting is off for an account, osmos will write the reply in chat for you to copy instead.</li></ul>"
+  },
+  {
+   "slug": "inbox-app-and-your-osmos-address",
+   "collection": "apps-and-connections",
+   "title": "Inbox app and your osmos address",
+   "description": "A unified inbox with triage, plus an address you can hand to osmos.",
+   "html": "<p>The Inbox app shows mail from every connected account in one list, sorted by what needs you. osmos triages each thread (needs a reply, informational, receipt...), offers one-tap replies, and lets you swipe to archive.</p><h2>Your osmos address</h2><p>Inside Inbox you'll find an email address that belongs to your assistant. Forward or CC mail to it and osmos handles it: it reads the thread, drafts a reply for you, or takes the action you asked for in your forward. Only mail that genuinely comes from one of your connected addresses is treated as instructions from you; anything else is treated as a third party.</p><blockquote>osmos replies to threads you hand it, but it won't send money, share credentials, or do anything irreversible from email. Those still come back to you.</blockquote>"
+  },
+  {
+   "slug": "calendar-and-ical-feeds",
+   "collection": "apps-and-connections",
+   "title": "Calendar and iCal feeds",
+   "description": "Google, Outlook, subscribed feeds, and events osmos spots in messages.",
+   "html": "<p>Connect Google Calendar or Outlook Calendar and osmos can see your day, create events, and answer questions like \"When am I free next week?\". You can also add iCal feeds (school timetables, sports fixtures, shared calendars) by URL.</p><h2>Events osmos finds for you</h2><p>When an email, WhatsApp or Slack message contains an invitation or a plan, osmos may suggest a calendar entry. It's a suggestion: check the date before you accept, especially when the message only says a weekday.</p><h2>Timezone</h2><p>Times are shown in the timezone on your profile, which the app sets from your phone. If you travel, times follow the phone.</p>"
+  },
+  {
+   "slug": "whatsapp",
+   "collection": "apps-and-connections",
+   "title": "WhatsApp",
+   "description": "Linking your number, what osmos can do, and why it sometimes needs re-linking. Plus plan and above.",
+   "html": "<p>WhatsApp connects by linking osmos as a companion device to your phone, the same way WhatsApp Web works. osmos can then read and search your conversations, draft replies, and send them when you ask.</p><h2>Re-linking</h2><p>WhatsApp occasionally drops companion devices, and when it does osmos's sync pauses. You'll see a card or a note in Tool manager asking you to re-link. Scan the code again and it picks up where it left off. This is a WhatsApp behaviour we can't fully prevent.</p><h2>Limits</h2><ul><li>osmos sees messages from the time you link it, plus recent history WhatsApp provides. It can't reach back years.</li><li>Group chats are included. osmos will only send in a group if you ask it to.</li><li>Voice notes and images are read where possible; results vary.</li></ul>"
+  },
+  {
+   "slug": "slack",
+   "collection": "apps-and-connections",
+   "title": "Slack",
+   "description": "Searching, reading and sending in your workspace.",
+   "html": "<p>Connect Slack and osmos can search messages, read the channels you're in, and send messages as you when asked. \"What did the team decide about pricing?\" or \"Tell #ops I'm running late\" both work.</p><p>osmos only sees channels and DMs your Slack account can see. Some workspaces restrict what apps can be connected; if the connection is refused, that's a workspace admin setting.</p>"
+  },
+  {
+   "slug": "reminders-and-tasks",
+   "collection": "apps-and-connections",
+   "title": "Reminders and tasks",
+   "description": "Tasks osmos manages, due dates, recurrence, and Apple Reminders sync.",
+   "html": "<p>Reminders is the task list osmos keeps for you. Say \"Remind me to call the dentist tomorrow at 9\" and it's created with a push at the right time. Tasks can repeat, have notes, and be completed from the notification, the app, or by telling osmos.</p><p>Turn on Apple Reminders sync in the app's settings and your tasks appear in Apple's Reminders too, so they show on your watch and lock screen. The sync is one way from osmos into Apple Reminders; completing them in either place keeps them in step.</p><h2>Tasks from notes and follow-ups</h2><p>Action items from a recorded meeting become tasks automatically. Follow-ups (Active Agents) can also create tasks when something needs you.</p>"
+  },
+  {
+   "slug": "third-party-tools-on-pro",
+   "collection": "apps-and-connections",
+   "title": "Third-party tools on Pro",
+   "description": "Notion, Linear, GitHub, Google Drive and dozens more, and what 'use its tools from chat' means.",
+   "html": "<p>On the Pro plan and above you can connect a wide set of tools: Notion, Linear, Jira, GitHub, Google Docs and Drive, HubSpot, Stripe, Trello, Zoom and many more. Once connected, osmos can use that tool's actions in chat: \"Create a Linear issue for the login bug\", \"Find the Notion page about onboarding\".</p><h2>Good to know</h2><ul><li>These connections are made through a partner service that speaks to each provider. You'll sign in with the provider directly.</li><li>osmos discovers the right tool for a request on demand. If it doesn't use a tool you expected, name it: \"Use Notion to...\".</li><li>Actions that delete or overwrite things ask for your approval first.</li></ul>"
+  },
+  {
+   "slug": "notes-and-recorded-meetings",
+   "collection": "notes-and-files",
+   "title": "Notes and recorded meetings",
+   "description": "Recording, transcription with speakers, summaries, action items, and what it costs.",
+   "html": "<p>Notes holds typed notes and recorded meetings. Record a meeting and osmos transcribes it with speakers separated, writes a summary with key points and decisions, and turns action items into tasks. It also works out who each speaker is where it can, using names mentioned and your calendar's attendee list for that slot.</p><h2>Cost</h2><p>Recordings use credits for the transcription and the summary. osmos checks you have enough before it starts and before it finishes; a half-hour meeting costs in the region of ten to twenty credits. If you run out mid-way, the recording is kept and you can retry once you have credits.</p><h2>Accuracy and limits</h2><ul><li>Speaker names are inferred. Rename a speaker in the note and the transcript updates; mark one as you.</li><li>Audio is deleted once the transcript is written; only the text stays.</li><li>Recording needs the app open or in the background with microphone permission. Phone calls can't be recorded.</li><li>Very noisy rooms and crosstalk reduce accuracy. Put the phone near the people speaking.</li></ul>"
+  },
+  {
+   "slug": "action-items-chase-remind-me-and-follow-ups-from-a-note",
+   "collection": "notes-and-files",
+   "title": "Action items: Chase, Remind me, and follow-ups from a note",
+   "description": "What each button on an action item does.",
+   "html": "<p>Every action item in a meeting summary has an owner and, often, a due date. The buttons do different things:</p><ul><li><strong>Remind me</strong> (items that are yours): osmos checks on the date and reminds you with the context if it isn't done.</li><li><strong>Chase</strong> (items that are someone else's): osmos checks on the date and, if there's no sign it's done, drafts a nudge for you to send, by email or WhatsApp, or just tells you.</li><li><strong>Follow up</strong> (items with no clear owner): osmos checks for any sign it happened and reports back.</li></ul><p>Before anything is created you see exactly what osmos will do, when it will check, and what it will be told. Change the date or the channel there, then confirm. The follow-up then has its own conversation, reachable from the note and from Core → Active Agents.</p><blockquote>osmos drafts nudges; it doesn't send them behind your back. A draft appears for you to approve.</blockquote>"
+  },
+  {
+   "slug": "files-and-the-osmos-folder",
+   "collection": "notes-and-files",
+   "title": "Files and the osmos folder",
+   "description": "Where documents live, the folder on your phone, and Recently Deleted.",
+   "html": "<p>Files holds documents osmos has made and documents you've shared with it. The same files appear in the Files app on your iPhone under an <em>osmos</em> folder, so you can open them in other apps or drop files in there for osmos to read.</p><p>Anything in Files can be referred to in chat: \"Summarise the lease in Files\".</p><h2>Deleting</h2><p>Deleted files go to Recently Deleted for 30 days, then are removed for good. Restore from there if you change your mind.</p>"
+  },
+  {
+   "slug": "routines-scheduled-work",
+   "collection": "routines-and-active-agents",
+   "title": "Routines: scheduled work",
+   "description": "Briefings, checks and summaries that run without you, and how results reach you.",
+   "html": "<p>A routine is a job osmos runs on a schedule: a morning briefing at 7:30, a Friday spend review, a daily check of a site. Set them up in Core → Routines by describing the job and when it should run. Times are your local time.</p><p>Results arrive as a card in chat and, if you allowed it, a notification. You can also add the Routines widget to your home screen to see what's next.</p><h2>Good to know</h2><ul><li><em>Check now</em> runs a routine immediately without changing its schedule.</li><li>A routine that couldn't run (a connection was down, or you were out of credits) shows the reason on its row.</li><li>Routines use credits each time they run. A daily routine costs roughly what a few chat replies cost, more if it searches a lot.</li><li>Routines pause when your credits run out and resume when they refresh.</li></ul>"
+  },
+  {
+   "slug": "active-agents-what-a-follow-up-actually-does",
+   "collection": "routines-and-active-agents",
+   "title": "Active Agents: what a follow-up actually does",
+   "description": "The promise, the schedule, the checks, and where to see it all.",
+   "html": "<p>A follow-up is a commitment osmos makes and keeps on its own: <em>I'll check with Ben on Friday at 9 whether the copy is done; if not, I'll draft an email for you to send.</em> Core → Active Agents lists every follow-up in flight with its next check.</p><p>On the check date osmos looks for evidence (a reply, a document, a calendar change), then does what it promised: reminds you, drafts a nudge, or reports what it found. Each run is written into the follow-up's own conversation so you can see exactly what it looked at and decided.</p><h2>Steering it</h2><p>Reply in the follow-up's conversation to change the plan: \"Check on Monday instead\", \"Use WhatsApp, not email\", \"Just tell me, don't draft anything\". <em>Check now</em> runs it immediately; <em>Cancel</em> stops it.</p><h2>Limits</h2><ul><li>osmos only knows about things it can see. If Ben replied by phone, tell osmos, or it will nudge him.</li><li>A follow-up that keeps finding nothing will report that and complete, rather than chasing forever.</li><li>Drafts need a connected account with sending enabled. Without one, the nudge is written in chat for you to copy.</li></ul>"
+  },
+  {
+   "slug": "what-osmos-will-never-do-on-its-own",
+   "collection": "routines-and-active-agents",
+   "title": "What osmos will never do on its own",
+   "description": "Approvals, hard limits, and the things that always come back to you.",
+   "html": "<p>Some actions always need you in the loop, whatever you've asked for:</p><ul><li>Spending money, including confirming a booking. osmos may hold a fare or a room, but the final confirmation is yours, and it needs a card in Wallet with a limit that covers it.</li><li>Typing a password, a card number, or a code from your phone. On the computer it hands control back to you for logins, two-factor codes, CAPTCHAs and payment pages.</li><li>Deleting or overwriting things in a connected tool. You get an approval prompt first.</li><li>Sending a message it wasn't asked to send.</li></ul><p>If you see an approval prompt you don't understand, decline it and ask osmos what it was trying to do.</p>"
+  },
+  {
+   "slug": "wallet-your-card-your-limits-your-tickets",
+   "collection": "travel-bookings-and-wallet",
+   "title": "Wallet: your card, your limits, your tickets",
+   "description": "Saving a card, how spending limits grow, and the tickets osmos collects from your email.",
+   "html": "<p>Wallet does three things. It holds a payment card so osmos can book for you. It holds a spending limit that osmos can't exceed. And it collects tickets, bookings and reservations osmos finds in your email, so they're in one place with the details to hand.</p><h2>The card</h2><p>Card details are entered into a secure form from our payment provider and stored with them, not by osmos. osmos only ever sees a token that can charge that card within your limit.</p><h2>The limit</h2><p>Your limit starts small and grows as bookings settle successfully. That's deliberate: it caps what a misunderstanding could cost while trust builds. You can see the current limit in Wallet. A booking over the limit isn't refused outright; osmos will explain and, for some suppliers, offer to pay them directly instead.</p>"
+  },
+  {
+   "slug": "booking-flights-hotels-and-trains",
+   "collection": "travel-bookings-and-wallet",
+   "title": "Booking flights, hotels and trains",
+   "description": "How a booking happens in chat, what you're shown, and what osmos needs from you.",
+   "html": "<p>Ask in chat: \"Book me a flight to Edinburgh on the 14th, back on the 16th\", \"Find a hotel near the British Museum for two nights\", \"Train to Manchester Saturday morning\". osmos searches live prices, shows you options as cards, and holds the one you pick.</p><p>Before anything is paid you see the full fare, the rules, and the passenger details it will use. Confirm, and osmos pays with your Wallet card and puts the confirmation in Wallet.</p><h2>Traveller details</h2><p>Names must match passports for flights. osmos keeps traveller profiles for you and the people you travel with; check them once and it will reuse them. Passport numbers and dates of birth are stored encrypted.</p><h2>Limits</h2><ul><li>osmos books through travel suppliers, so availability and price are theirs, and can change between search and confirmation. If a fare disappears, osmos tells you and searches again.</li><li>Loyalty points, reward seats, and airlines outside the supplier's network can't be booked in chat. osmos can use its computer to do those on the airline's own site with you watching.</li><li>Rail covers the UK and most of Europe; refundability depends on the operator and the ticket type.</li></ul>"
+  },
+  {
+   "slug": "paying-and-approvals",
+   "collection": "travel-bookings-and-wallet",
+   "title": "Paying and approvals",
+   "description": "Exactly what happens between 'book it' and 'booked'.",
+   "html": "<ol><li>osmos holds the fare or room with the supplier. Nothing is charged yet.</li><li>You see a review card: price, rules, traveller details, and the card and limit that will be used.</li><li>You confirm. If you've asked osmos to auto-confirm a hold, you get a notification with a window to cancel before it goes through.</li><li>The supplier confirms. The ticket lands in Wallet and in your email.</li></ol><p>If a confirmation fails after payment, osmos tells you immediately and the charge is released by the supplier; that can take a few days to show on a statement.</p>"
+  },
+  {
+   "slug": "changes-refunds-and-rebooking",
+   "collection": "travel-bookings-and-wallet",
+   "title": "Changes, refunds and rebooking",
+   "description": "What osmos can and can't do once a booking exists.",
+   "html": "<p>Ask osmos to check the fare rules for any booking in Wallet. Where the supplier allows changes or refunds through their system, osmos can request them; where they don't, it tells you what to do and with whom.</p><p>When an airline or operator changes a schedule, osmos updates the ticket in Wallet. When a booking is rebooked on the same reference, the new ticket replaces the old one rather than sitting next to it.</p><blockquote>Refund timing is the supplier's. osmos can confirm a refund was requested and accepted; it can't speed up the money.</blockquote>"
+  },
+  {
+   "slug": "places-and-restaurant-reservations",
+   "collection": "travel-bookings-and-wallet",
+   "title": "Places and restaurant reservations",
+   "description": "Finding places near you and letting osmos book a table.",
+   "html": "<p>Ask for places the way you'd ask a friend: \"Somewhere good for lunch near the office\", \"Coffee near Waterloo, quiet\". osmos shows a map card with options, ratings and distance.</p><p>For reservations, osmos books on the restaurant's own site or booking platform. It does this on its computer while you can watch; if the site needs an account or a card guarantee, it hands control to you for that step. Where a restaurant only takes phone bookings, osmos will say so and give you the number.</p>"
+  },
+  {
+   "slug": "what-computer-use-is",
+   "collection": "computer-use",
+   "title": "What Computer Use is",
+   "description": "A cloud desktop with a browser, what it's for, and what it isn't for.",
+   "html": "<p>osmos has a real computer: a Linux desktop in the cloud with Chrome, LibreOffice and a terminal. When a job needs a real logged-in browser, a native app, or anything visual, osmos uses it. Booking with airline points, filling in a form on a government site, pulling numbers out of a portal, checking availability on a site with no API.</p><p>It's the same machine every time, so logins you've done stay done. Files it produces land in your Files app.</p><h2>When osmos uses it</h2><p>osmos prefers its in-chat tools when they can do the job; the computer is for what those can't. You can also ask for it directly: \"Use the desktop to...\". Computer Use is rolling out gradually; if you don't see it yet, it's coming.</p>"
+  },
+  {
+   "slug": "watch-live-take-over-give-back",
+   "collection": "computer-use",
+   "title": "Watch live, take over, give back",
+   "description": "Seeing what osmos is doing and stepping in.",
+   "html": "<p>When the computer is working you'll see a card in chat with each step as it happens. <em>Watch live</em> opens a live view of the screen. <em>Take over</em> gives you the mouse and keyboard; osmos waits. <em>Give back control</em> hands it back and osmos carries on with the original task. <em>Stop</em> ends the job.</p><p>osmos hands over on its own for logins, two-factor codes, CAPTCHAs and payment pages. You'll get a notification saying what it needs. Do that step, then give control back.</p><h2>Good to know</h2><ul><li>The live view uses your phone's keyboard; there's a button to type on the desktop.</li><li>If nobody hands control back within about half an hour, the job stops and the machine pauses.</li><li>Watching live on a finished job wakes the machine up and counts as computer time until you close the view.</li></ul>"
+  },
+  {
+   "slug": "minutes-limits-and-cost",
+   "collection": "computer-use",
+   "title": "Minutes, limits and cost",
+   "description": "How computer time is measured and what caps apply.",
+   "html": "<p>Computer time is measured while the machine is running, whoever is driving it: the agent working, you holding control, or the screen being watched. Between jobs the machine is paused and costs nothing.</p><ul><li><strong>Minutes</strong> come with your plan: 120 a month on Plus, 300 on Pro and 600 on Max, and they reset with your credits. The free trial includes 30 one-time minutes. See Core → Usage.</li><li><strong>A daily cap</strong> of 120 minutes in any 24 hours.</li><li><strong>Per job</strong>: about 25 minutes and a step budget. A job that runs out stops and tells you where it got to.</li><li><strong>Credits</strong>: computer time also uses credits at cost, on top of the model's own thinking. A typical two-minute job is a few credits.</li></ul><p>When minutes run out, the desktop and Watch live pause until they reset. osmos will say so rather than fail silently.</p>"
+  },
+  {
+   "slug": "what-the-computer-will-never-do-and-about-your-logins",
+   "collection": "computer-use",
+   "title": "What the computer will never do, and about your logins",
+   "description": "Hard limits, and how signed-in sessions are kept.",
+   "html": "<ul><li>It never types your passwords, card numbers or codes. Those steps are handed to you.</li><li>It never presses the final Pay or Confirm on a purchase. It gets you to the review page and stops.</li><li>It doesn't solve CAPTCHAs. Sites that challenge it are handed to you.</li><li>One job at a time per account.</li></ul><h2>Logins</h2><p>Sessions you sign into on the computer persist on that machine. If the machine is retired after a long idle period, osmos snapshots the browser profile first and restores it onto the next one, so monthly jobs usually find you still signed in. Sign out on the machine if you'd rather not keep a session.</p>"
+  },
+  {
+   "slug": "credits-explained",
+   "collection": "plans-credits-and-usage",
+   "title": "Credits explained",
+   "description": "The single unit everything in osmos runs on.",
+   "html": "<p>Everything osmos does for you costs credits: a chat reply, a routine run, a background check, a recorded meeting, computer time. Credits are how you see and control that cost. One reply is typically a couple of credits; a long research answer or a meeting recording is more.</p><p>Core → Usage shows credits used, what's left, when they refresh, and <em>Where it went</em>: chat, routines, Watch, notes, computer.</p><h2>What counts</h2><ul><li>Chat replies, including the tools osmos uses on the way.</li><li>Routines and follow-ups each time they run.</li><li>Background checks that keep your Home card current.</li><li>Notes transcription and summaries.</li><li>Computer time, at cost.</li></ul><p>Reading your Home card, opening apps, and browsing your own data don't cost anything.</p>"
+  },
+  {
+   "slug": "plans-and-pricing",
+   "collection": "plans-credits-and-usage",
+   "title": "Plans and pricing",
+   "description": "Free, Plus, Pro and Max: what each includes.",
+   "html": "<p>Prices are shown in the app for your country and billed through the App Store. Manage or cancel in your iPhone's Settings → Apple Account → Subscriptions.</p><ul><li><strong>Free</strong>: a one-time trial of 200 credits and 30 minutes of Computer Use to try osmos. They don't refresh.</li><li><strong>Plus</strong>: 1,500 credits a month. Adds WhatsApp, background monitoring and 120 minutes of Computer Use a month.</li><li><strong>Pro</strong>: 3,000 credits a month. Adds third-party tools (Notion, Linear, GitHub and many more) and 300 minutes of Computer Use a month.</li><li><strong>Max</strong>: 8,000 credits a month and 600 minutes of Computer Use a month.</li></ul><p>Annual plans are available at a discount. Credits refresh monthly on all paid plans, on a rolling month from the day you subscribed, not the calendar month. Upgrading applies straight away; downgrading takes effect at the end of the paid period.</p><blockquote>If the plans screen shows an error rather than prices, your App Store country may not be one we're priced in yet. Tell us via Help and we'll add it.</blockquote>"
+  },
+  {
+   "slug": "out-of-credits-what-pauses",
+   "collection": "plans-credits-and-usage",
+   "title": "Out of credits: what pauses",
+   "description": "Chat and background work stop together, and how to get going again.",
+   "html": "<p>Credits are one pool. When they're gone, chat replies pause and so do routines, follow-ups and Home card checks. Everything you've already got stays readable; nothing is deleted.</p><p>On a paid plan, credits refresh on your next monthly date, shown on the Usage page. On the free trial they don't refresh; upgrade to continue. Either way osmos picks up where it left off, and any routine that missed a run tells you so.</p>"
+  },
+  {
+   "slug": "the-usage-page",
+   "collection": "plans-credits-and-usage",
+   "title": "The Usage page",
+   "description": "Reading credits, activity, computer time and 'Where it went'.",
+   "html": "<ul><li><strong>Credits</strong>: used, total, and the refresh date.</li><li><strong>This week</strong>: how much you've used osmos each day.</li><li><strong>Computer</strong>: minutes used this period against your plan, split between the desktop and code jobs, today's minutes against the daily cap, whether a machine is running, and the recent jobs with what each took.</li><li><strong>Where it went</strong>: credits by kind.</li></ul><p>Numbers include work that's running right now, so the page matches what osmos is enforcing at that moment.</p>"
+  },
+  {
+   "slug": "your-data-and-where-it-goes",
+   "collection": "privacy-security-and-your-account",
+   "title": "Your data and where it goes",
+   "description": "What osmos stores, what it sends to AI providers, and the terms it does that under.",
+   "html": "<p>osmos stores what it needs to work for you: your conversations, the mail and messages it has read from connected accounts, your notes, files, tasks, bookings and memory. It's stored encrypted, in the EU, and access is limited to your account.</p><p>To think, osmos sends the relevant parts of a request to AI model providers. We choose providers that don't retain or train on that data, and we don't send more than a request needs. Some processing is done by specialist partners: transcription for recordings, travel suppliers for bookings, our payment provider for cards, a partner that connects third-party tools. The full list of categories is in our <a href=\"/privacy\">privacy policy</a>, and we'll name specific processors on request.</p><h2>What we don't do</h2><ul><li>We don't sell data or use your content to train models.</li><li>We don't store card numbers; our payment provider does.</li><li>Passport numbers and similar details are encrypted with an extra layer before they're stored.</li></ul>"
+  },
+  {
+   "slug": "exporting-or-deleting-your-data",
+   "collection": "privacy-security-and-your-account",
+   "title": "Exporting or deleting your data",
+   "description": "Both are in Core → Profile, and both are complete.",
+   "html": "<p><strong>Export</strong> produces a file with everything osmos holds for your account: conversations, notes, tasks, memory, bookings, connection records and more. It's yours to keep.</p><p><strong>Delete account</strong> removes everything, including memory, files, and connections, and revokes the permissions you granted. It can't be undone. Your subscription is separate and managed through the App Store; cancel it there too.</p>"
+  },
+  {
+   "slug": "app-lock-and-face-id",
+   "collection": "privacy-security-and-your-account",
+   "title": "App Lock and Face ID",
+   "description": "Locking the app, and the actions that always ask for Face ID.",
+   "html": "<p>Turn on App Lock in Core → Profile to require Face ID (or your passcode) when the app opens or comes back from the background.</p><p>Whether or not App Lock is on, some actions always ask for Face ID: confirming a transfer from Wallet, and deleting your account.</p>"
+  },
+  {
+   "slug": "notifications-what-osmos-sends-and-how-to-tune-it",
+   "collection": "privacy-security-and-your-account",
+   "title": "Notifications: what osmos sends and how to tune it",
+   "description": "Every kind of push, and the settings that control them.",
+   "html": "<ul><li><strong>Texted items</strong>: something urgent from your Home card. Limited by your active hours and a daily cap.</li><li><strong>Routine results</strong>: when a routine you scheduled has run.</li><li><strong>Follow-ups</strong>: when a follow-up found something or needs you.</li><li><strong>Notes ready</strong>: when a recording has been transcribed.</li><li><strong>Computer needs you</strong>: a login, a code, or a review page.</li><li><strong>Bookings</strong>: holds about to confirm, confirmations, schedule changes.</li><li><strong>Reminders</strong>: tasks with a time.</li></ul><p>Set your active hours in Core → Profile to keep the unrequested ones to your day. Turn off notifications entirely in iPhone Settings; osmos still works, you'll just see things when you open the app.</p>"
+  },
+  {
+   "slug": "timezone-and-travel",
+   "collection": "privacy-security-and-your-account",
+   "title": "Timezone and travel",
+   "description": "Why times are right at home and how they behave abroad.",
+   "html": "<p>osmos uses the timezone on your profile, which the app updates from your phone. Routine times, reminders and the Home card's dates follow it. When you travel, your phone's zone changes and so does osmos's; a 7:30 briefing becomes 7:30 local. If you'd rather keep home time while away, tell osmos and it will adjust the routine.</p>"
+  },
+  {
+   "slug": "common-error-messages",
+   "collection": "troubleshooting-and-known-limits",
+   "title": "Common error messages",
+   "description": "What they mean and what to do.",
+   "html": "<ul><li><strong>Something went wrong / Failed to process server response</strong>: the app couldn't read a reply from our servers. Pull to refresh or reopen the app. If it keeps happening, update the app, then tell us.</li><li><strong>Out of credits</strong>: see <a href=\"/help/plans-and-pricing\">Plans and pricing</a>. Nothing is lost.</li><li><strong>A desktop task is already running</strong>: one computer job at a time. Wait for it, or stop it from its card.</li><li><strong>Computer time for this period is used up</strong>: your monthly minutes or the daily cap. The Usage page shows when they reset.</li><li><strong>Connection needs attention</strong> (on a card or in Tool manager): reconnect the account. Providers expire permissions from time to time.</li><li><strong>WhatsApp needs re-pairing</strong>: scan the code again in Tool manager → WhatsApp.</li></ul>"
+  },
+  {
+   "slug": "a-connection-stopped-working",
+   "collection": "troubleshooting-and-known-limits",
+   "title": "A connection stopped working",
+   "description": "Why providers drop permissions and how to fix it in a minute.",
+   "html": "<p>Email, calendar and messaging providers expire or revoke app permissions: after a password change, a security review, a long period of inactivity, or simply on a schedule. When that happens osmos can't read that account, and you'll see a card asking you to reconnect.</p><p>Core → Tool manager → the account → Connect. You'll go through the provider's sign-in again and osmos picks up where it left off. Nothing you've already got is lost.</p>"
+  },
+  {
+   "slug": "osmos-is-slow-or-not-replying",
+   "collection": "troubleshooting-and-known-limits",
+   "title": "osmos is slow or not replying",
+   "description": "Busy periods, long jobs, and when to worry.",
+   "html": "<p>Replies usually start within a few seconds. At busy times the AI providers osmos relies on can throttle, and a reply may take longer or retry; osmos waits and tries again automatically, and switches provider if one keeps refusing. A job that searches several accounts genuinely takes longer; the grey step lines show it working.</p><p>If nothing has happened for a minute, send your message again. If the app itself feels stuck, close it fully and reopen; your thread is safe.</p>"
+  },
+  {
+   "slug": "things-osmos-can-get-wrong",
+   "collection": "troubleshooting-and-known-limits",
+   "title": "Things osmos can get wrong",
+   "description": "Honest limits, so you know what to double-check.",
+   "html": "<ul><li><strong>Dates and days.</strong> A message that says \"Thursday\" without a date is easy to misplace. Card dates are computed by the server from real event dates for this reason; in chat, confirm the date when it matters.</li><li><strong>Confident wrong answers.</strong> Like any AI, it can state something plausible that isn't so. Ask it to show its source; the grey step lines show what it actually read.</li><li><strong>Sums and totals.</strong> It's good at finding numbers and less reliable adding many of them up. Ask for the list, then the total.</li><li><strong>Who said what.</strong> In recordings, speaker names are inferred and can be swapped. Rename them in the note.</li><li><strong>Missing things.</strong> It only sees connected accounts, and only what it retrieved for that question. \"Search again, including last year\" widens the net.</li><li><strong>Booking details.</strong> Always read the review card: dates, names, times, the airport.</li></ul><p>When it's wrong, say so in chat. Corrections are remembered and the next answer is better for it.</p>"
+  },
+  {
+   "slug": "requesting-a-feature",
+   "collection": "troubleshooting-and-known-limits",
+   "title": "Requesting a feature",
+   "description": "Where to send ideas and what happens to them.",
+   "html": "<p>Core → Help → Request a feature. Tell us the job you were trying to do, not just the button you wanted; the job is what we can design for. We read every one, and the roadmap in Help shows what's coming.</p>"
+  }
+ ]
+}

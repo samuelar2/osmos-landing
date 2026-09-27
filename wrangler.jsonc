@@ -1,6 +1,6 @@
 {
-  // meetosmos.com (+ juno-labs.ai) are custom domains on this worker.
-  // www.meetosmos.com 301s here via a Redirect Rule in the Cloudflare dashboard.
+  // meetosmos.com is the custom domain on this worker.
+  // www.meetosmos.com and juno-labs.ai 301 here via proxied DNS + Redirect Rules in the Cloudflare dashboard.
   // Deploy: npm run build && npx wrangler deploy
   "name": "osmos-landing",
   "compatibility_date": "2026-07-29",

@@ -1,0 +1,113 @@
+---
+import Page from "../../layouts/Page.astro";
+import AppStoreButton from "../../components/AppStoreButton.astro";
+import { rivals, CHECKED, type Rival } from "../../data/compare";
+import { breadcrumbs, graph, webPage } from "../../lib/site";
+
+export function getStaticPaths() {
+  return rivals.map((r) => ({ params: { rival: r.slug }, props: { r } }));
+}
+
+const { r } = Astro.props as { r: Rival };
+const path = `/compare/${r.slug}`;
+const other = rivals.find((o) => o.slug !== r.slug)!;
+const jsonLd = graph(
+  webPage(path, r.h1, r.description),
+  breadcrumbs([
+    { name: "Home", path: "/" },
+    { name: r.h1, path },
+  ]),
+);
+---
+
+<Page title={r.title} description={r.description} path={path} jsonLd={jsonLd}>
+  <header class="page-hero">
+    <ol class="crumbs">
+      <li><a href="/">Home</a></li>
+      <li>Compare</li>
+    </ol>
+    <h1>{r.h1}</h1>
+    <p class="lede">{r.lede}</p>
+  </header>
+
+  <section class="band" style="padding-top:0">
+    <div class="band__head">
+      <p class="kicker">The short version</p>
+      <h2>Where osmos is different.</h2>
+    </div>
+    <div class="cards">
+      {
+        r.short.map((c) => (
+          <div class="card">
+            <h3>{c.title}</h3>
+            <p>{c.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="band__head">
+      <p class="kicker">Side by side</p>
+      <h2>osmos and {r.name}, point by point.</h2>
+      <p class="lede" style="font-size:15px">{r.name} facts are from the sources below, checked on {CHECKED}.</p>
+    </div>
+    <div class="compare-wrap">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th scope="col"><span class="sr-only">Topic</span></th>
+            <th scope="col">osmos</th>
+            <th scope="col">{r.name}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            r.rows.map((row) => (
+              <tr>
+                <th scope="row">{row.topic}</th>
+                <td data-label="osmos">{row.osmos}</td>
+                <td data-label={r.name}>
+                  {row.them}
+                  {row.src &&
+                    row.src.map((n) => (
+                      <sup>
+                        <a href={`#src-${n}`} aria-label={`Source ${n}`}>
+                          {n}
+                        </a>
+                      </sup>
+                    ))}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="band band--narrow sources">
+    <h2 style="font-size:16px;color:var(--ink-2)">Sources ({r.name}, checked {CHECKED})</h2>
+    <ol>
+      {
+        r.sources.map((s, i) => (
+          <li id={`src-${i + 1}`}>
+            <a href={s.url} rel="nofollow noopener" target="_blank">
+              {s.label}
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+    <p>
+      osmos facts are from the <a href="/help">osmos help centre</a>. See also <a href={`/compare/${other.slug}`}>osmos vs {other.name}</a>.
+    </p>
+  </section>
+
+  <section class="cta-band">
+    <h2>Try osmos on your iPhone.</h2>
+    <p>Free to start with 200 credits. You approve every action.</p>
+    <AppStoreButton />
+  </section>
+</Page>

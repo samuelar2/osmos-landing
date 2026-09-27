@@ -1,0 +1,6 @@
+# osmos assistant — https://meetosmos.com
+# Everyone is welcome to crawl, including AI search and assistant crawlers.
+User-agent: *
+Allow: /
+
+Sitemap: https://meetosmos.com/sitemap-index.xml
